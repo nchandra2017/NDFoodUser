@@ -1,0 +1,220 @@
+  
+        /* Modal Background */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1000; /* On top of other elements */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0, 0, 0, 0.6); /* Black with opacity */
+        }
+
+        /* Modal Content */
+        .userLogin-content {
+            background-color: #fff;
+            margin: 10% auto; /* Center vertically and horizontally */
+            padding: 20px 30px;
+            border-radius: 10px; /* Rounded corners */
+            width: 90%;
+            max-width: 400px; /* Set a maximum width for larger screens */
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            position: relative;
+        }
+
+        /* Close Button */
+        .close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 25px;
+            font-weight: bold;
+            color: #aaa;
+            cursor: pointer;
+        }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        /* Logo Styling */
+        .userLogin-content .logo {
+            display: block;
+            margin: 0 auto 15px;
+            width: 80px; /* Adjust logo size */
+        }
+
+        /* Heading */
+        .userLogin-content h2 {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        /* Form Styling */
+        .userLogin-content .form-group {
+            margin-bottom: 15px;
+        }
+
+        .userLogin-content label {
+            font-size: 14px;
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .userLogin-content input[type="text"],
+        .userLogin-content input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+ /* Toggle Container Styling */
+.form-group .toggle-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    
+}
+
+.form-group .toggle-container label {
+    margin-right: 10px;
+    
+}
+
+.form-group .toggle-container input[type="checkbox"] {
+    width: 40px;
+    height: 20px;
+    appearance: none;
+    background: #ccc;
+    border-radius: 10px;
+    position: relative;
+    outline: none;
+    cursor: pointer;
+    border: 2px solid transparent; /* Default border */
+    transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.form-group .toggle-container input[type="checkbox"]:checked {
+    background: #0073e6;
+    
+}
+
+.form-group .toggle-container input[type="checkbox"]::before {
+    content: '';
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    background: white;
+    border-radius: 50%;
+    top: 1px;
+    left: 1px;
+    transition: 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.form-group .toggle-container input[type="checkbox"]:checked::before {
+    left: 21px;
+    
+}
+
+/* Red border only on focus */
+.form-group .toggle-container input[type="checkbox"]:focus {
+    border-color: red;
+}
+
+
+        .btn {
+            width: 100%;
+            padding: 12px 20px;
+            background-color: #ff4500;
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #e63900;
+        }
+        /* Button Styling */
+        .userLogin-content .btn {
+            width: 100%;
+            padding: 12px 20px;
+            background-color: #ff4500; /* Bright orange for attention */
+            border: none;
+            color: #fff;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .userLogin-content .btn:hover {
+            background-color: #e63900; /* Darker orange on hover */
+        }
+
+        /* Links Section */
+        .userLogin-content .links {
+            text-align: center;
+            margin-top: 10px;
+        }
+
+        .userLogin-content .links a {
+            color: #ff4500;
+            font-size: 14px;
+            text-decoration: underline;
+            display: inline-block;
+            margin: 5px 0;
+        }
+
+        .userLogin-content .links a:hover {
+            color: #e63900;
+            text-decoration: underline;
+        }
+
+        /* Media Query for Small Screens */
+        @media (max-width: 768px) {
+            .userLogin-content {
+                padding: 15px;
+                margin: 15% auto; /* Adjust spacing for smaller screens */
+            }
+        
+            .userLogin-content h2 {
+                font-size: 20px;
+            }
+
+            .userLogin-content .btn {
+                font-size: 14px;
+                padding: 10px;
+            }
+        }
+
+        /* Login Link Styling */
+        .login-link {
+            display: inline-block;
+            color: #ff4500;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .login-link:hover {
+            color: #e63900;
+            text-decoration: underline;
+        }
+   

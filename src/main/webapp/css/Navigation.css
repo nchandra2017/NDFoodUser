@@ -1,0 +1,297 @@
+  body {
+    margin: 0;
+    padding: 0;
+}
+
+.content {
+    margin-top: 70px; /* Adjust this based on the height of your navbar */
+    padding: 20px;
+}
+
+    
+/* Base styles */
+.navbar {
+    position: fixed; /* Fixes the navbar to the top */
+    top: 0; /* Aligns the navbar to the top of the viewport */
+    width: 100%; /* Ensures the navbar spans the entire width */
+    z-index: 1000; /* Places the navbar above all other elements */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0px;
+    background-color: white; /* Ensure the navbar has a background to prevent transparency issues */
+    box-shadow: 0 8px 15px #ccc; /* Shadow for visual separation */
+    
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    height: 40px;
+    margin-right: 10px;
+}
+
+.logo-text {
+    font-size: 20px;
+    font-weight: bold;
+    color: red;
+}
+
+.navigation-links {
+    display: flex;
+    list-style: none;
+    margin: 0; /* Ensure no margin */
+    padding: 0; /* Ensure no padding */
+}
+
+.navigation-links a {
+    margin-top: -10px;
+    text-decoration: none;
+    color: red;
+    font-size: 16px;
+    padding: 8px 15px;
+    border-radius: 5px; /* Add a subtle rounded corner */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
+    background-color: #fff; /* Default background color */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for non-hover state */
+}
+
+.navigation-links a:hover {
+    color: darkred; /* Text color change on hover */
+    background-color: #fff; /* Maintain white background */
+    transform: translateY(-3px); /* Create the "coming out" effect */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Stronger shadow to enhance 3D effect */
+    border: 1px solid red;
+}
+
+.navigation-links a i {
+    position: relative;
+     margin-right: 8px; 
+}
+#navbar-cart-count {
+    position: absolute;
+    top: -8px; 
+    right: -10px; 
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    border-radius: 50%;
+    padding: 2px 5px; 
+    display: inline-block;
+}
+.navigation-links {
+    display: flex;
+    list-style: none;
+    margin: 0; /* Ensure no margin */
+    padding: 0; /* Ensure no padding */
+    gap: 5px; /* Adds a consistent gap between links */
+}
+
+.navigation-links li {
+   
+    margin-top: 5px;
+}
+
+.navigation-links a {
+    margin-top: px;
+    text-decoration: none;
+    color: red;
+    font-size: 16px;
+    padding: 10px 25px; /* Adds clickable padding around text */
+}
+
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+    position: relative;
+}
+
+.hamburger i {
+    margin-top:-10px;
+    font-size: 20px;
+    
+}
+/* Account dropdown styles */
+.account-dropdown {
+    position: relative;
+}
+
+.account-link {
+    display: inline-block;
+    cursor: pointer;
+    color: #333;
+    text-decoration: none;
+    padding: 10px 15px;
+}
+
+.account-link i {
+    margin-left: 5px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 120%;
+    right: 0;
+    width: 180px;
+    background-color: red;
+    z-index: 1000;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    transform: translateY(-20px);
+    opacity: 0;
+}
+
+.dropdown-content a {
+    display: block;
+    padding: 15px;
+    text-align: left;
+    color: red;
+    font-size:14px;
+    
+    
+    
+   
+}
+
+.dropdown-content a:hover {
+       
+    text-decoration: underline;
+}
+
+.account-dropdown:hover .dropdown-content {
+    display: block;
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* General Navigation Links Style */
+.navigation-links {
+    display: flex;
+    list-style: none;
+    margin: 0; /* Ensure no margin */
+    padding: 0; /* Ensure no padding */
+}
+
+.mobile-signout {
+    display: none;
+}
+
+/* 3D Hover Effect for Desktop View */
+@media (min-width: 769px) {
+    .navigation-links a:hover {
+        color: darkred; /* Text color change on hover */
+        transform: translateY(-3px); /* Create the "coming out" effect */
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Stronger shadow for 3D effect */
+        border: 1px solid darkred; /* Optional border for desktop hover */
+    }
+}
+
+
+
+
+
+/* Mobile view adjustments */
+@media (max-width: 768px) {
+	 .navbar {
+        position: fixed; /* Keep it fixed for mobile */
+        top: 0;
+        width: 100%; /* Ensure full width on mobile */
+        z-index: 1001; /* Ensure it stays above other elements */
+        padding: 10px 20px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+     
+   
+    
+    
+        
+     
+
+.navigation-links.active {
+        
+    right: 0; /* Slide-in effect on activation */
+    }
+    
+.logo img {
+    height: 25px;
+    
+   
+}
+
+.logo-text {
+    font-size: 14px;
+    font-weight: bold;
+    color: red;
+}
+   
+
+     .navigation-links {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        top: 47px; /* Adjust this to match your navbar height */
+        right: -70%; /* Initially off-screen */
+        height: calc(100% - 50px); /* Subtract the height of the navbar */
+        width: 65%; 
+        background-color: #fff;
+        box-shadow: -4px 0 6px rgba(0, 0, 0, 0.1);
+        
+        margin: 0; /* Ensure no margin */
+        transition: right 0.3s ease-in-out; /* Fly-in effect */
+        z-index: 1000; /* Keep it below the navbar */
+         
+    }
+    .navigation-links a {
+    margin-top: -10px;
+    text-decoration: none;
+    color: black;
+    font-size: 12px;
+    padding: 5px 10px;
+    text-align: left; 
+    display: block; 
+    box-shadow: none;
+}
+
+
+.navigation-links a:hover {
+        text-decoration: underline; 
+    
+        
+    }
+    .navigation-links.active {
+        right: 0; 
+        
+        
+        
+    }
+
+    .navigation-links li {
+        margin: 10px 0;
+        text-align: center;
+    }
+
+    .hamburger {
+        display: block; 
+        position: absolute;
+        right: 10px; 
+        top: 15px;
+    }
+    .mobile-signout {
+        display: block;
+        text-align: center;
+        margin: 10px 0;
+        color: #000; /* Adjust the color to fit your theme */
+        font-size: 16px;
+        text-decoration: none;
+    }
+    
+    .mobile-signout i {
+        margin-right: 5px;
+    }
+}
