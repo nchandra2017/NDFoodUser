@@ -135,7 +135,7 @@
 
 // Fetch Store Hours
 function fetchStoreHours() {
-    fetch('/bangalifood/FetchStoreHoursServlet')
+	fetch('/com.foodUser/FetchStoreHoursServlet')
         .then(response => response.json())
         .then(data => {
             console.log("Fetched store hours:", data);
@@ -899,7 +899,7 @@ function formatDateToMMDDYYYY(date) {
             }
 
             // Redirect to the checkout page
-            window.location.href = "/bangalifood/jsp/PaymentStripe.jsp"; // Update path if necessary
+            window.location.href = "/com.foodUser/jsp/PaymentStripe.jsp"; // Update path if necessary
         }
 
       

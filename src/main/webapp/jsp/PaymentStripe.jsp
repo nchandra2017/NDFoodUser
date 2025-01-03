@@ -35,6 +35,8 @@
             border-radius: 5px;
             margin-bottom: 20px;
         }
+        
+      
 
        
     </style>
@@ -212,7 +214,13 @@
     </div>
 
 
-    <div id="payment-result"></div>
+   <div id="error-popup" class="popup hidden">
+    <div class="popup-content">
+        <p id="error-message">Error occurred.</p>
+        <button id="close-popup">Close</button>
+    </div>
+</div>
+
 </form>
 
     <% } %>
@@ -801,13 +809,40 @@
                 });
 
                 if (error) {
-                    resultDiv.textContent = `Payment failed: ${error.message}`;
-                    resultDiv.style.color = "red";
+                    console.error("Stripe Payment Error:", error.message);
+
+                    // Show the error in a popup
+                    let errorMessage;
+                    switch (error.code) {
+                        case "card_declined":
+                            if (error.decline_code === "insufficient_funds") {
+                                errorMessage = "Payment failed due to insufficient funds in your account.";
+                            } else {
+                                errorMessage = "Your card was declined. Please use a different card.";
+                            }
+                            break;
+                        case "expired_card":
+                            errorMessage = "Your card has expired. Please use a different card.";
+                            break;
+                        case "incorrect_cvc":
+                            errorMessage = "Incorrect CVC. Please check and try again.";
+                            break;
+                        case "processing_error":
+                            errorMessage = "An error occurred while processing your payment. Please try again.";
+                            break;
+                        default:
+                            errorMessage = `Payment failed: ${error.message}`;
+                    }
+
+                    showErrorPopup(errorMessage); // Call the popup function to display the error message
                 } else if (paymentIntent.status === "succeeded") {
+                    // Handle success
                     resultDiv.textContent = "Payment successful!";
                     resultDiv.style.color = "green";
                     window.location.href = "<%= request.getContextPath() %>/jsp/OrderConfirmation.jsp";
                 }
+
+
             } catch (err) {
                 console.error("Payment Error:", err.message);
                 resultDiv.textContent = `Error: ${err.message}`;
@@ -817,6 +852,23 @@
 
         updateHiddenAmount();
     });
+    
+    function showErrorPopup(message) {
+        const errorMessageElement = document.getElementById("error-message");
+        errorMessageElement.textContent = message;
+
+        const popup = document.getElementById("error-popup");
+        popup.classList.remove("hidden");
+
+        const closeButton = document.getElementById("close-popup");
+        closeButton.addEventListener("click", function () {
+            popup.classList.add("hidden");
+            location.reload(); // Reload the page on popup close
+        });
+    }
+
+    
+    
     function placeOrder(payload) {
         fetch("/PaymentServlet", {
             method: "POST",

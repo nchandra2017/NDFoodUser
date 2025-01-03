@@ -52,6 +52,7 @@ public class PaymentServlet extends HttpServlet {
         Connection conn = null;
 
         try {
+        	logger.info("Starting PaymentServlet processing...");
             // Retrieve userId from session
             Integer userId = (Integer) session.getAttribute("userId");
             if (userId == null) {
@@ -184,7 +185,7 @@ public class PaymentServlet extends HttpServlet {
             }
 
             // Insert items into `order_items` table
-            String getItemIdSQL = "SELECT item_id FROM items WHERE item_name = ?";
+            String getItemIdSQL = "SELECT item_id FROM items WHERE TRIM(item_name) = ?";
             String insertOrderItemsSQL = "INSERT INTO order_items (order_id, item_id, item_name, price, quantity) VALUES (?, ?, ?, ?, ?)";
 
             try (PreparedStatement psGetItemId = conn.prepareStatement(getItemIdSQL);
