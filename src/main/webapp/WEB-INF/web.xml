@@ -129,7 +129,12 @@
         <servlet-class>javaPage.contol.OrderPageServlet</servlet-class> 
     </servlet>
     
+     <servlet>
+        <servlet-name>OrderConfirmationServlet</servlet-name>
+        <servlet-class>javaPage.contol.OrderConfirmationServlet</servlet-class> 
+    </servlet>
     
+   
  
     
     <session-config>

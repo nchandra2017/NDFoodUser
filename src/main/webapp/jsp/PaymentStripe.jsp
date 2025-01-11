@@ -35,10 +35,8 @@
             border-radius: 5px;
             margin-bottom: 20px;
         }
-        
-      
 
-       
+ 
     </style>
 </head>
 
@@ -214,12 +212,14 @@
     </div>
 
 
-   <div id="error-popup" class="popup hidden">
-    <div class="popup-content">
-        <p id="error-message">Error occurred.</p>
-        <button id="close-popup">Close</button>
+<div id="error-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-btn">&times;</span>
+        <p class="modal-body"></p>
     </div>
 </div>
+
+
 
 </form>
 
@@ -711,199 +711,136 @@
         const card = elements.create("card", {
             style: {
                 base: {
-                    color: "Black", /* Text color inside the input field */
+                    color: "black",
                     fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
                     fontSize: "14px",
                     fontSmoothing: "antialiased",
-                    
                     "::placeholder": {
-                        color: "Gray", /* Light gray for placeholder text */
+                        color: "gray",
                     },
                 },
                 invalid: {
-                	 color: "Red", /* Error text color */
-                     iconColor: "Red",
+                    color: "red",
+                    iconColor: "red",
                 },
             },
         });
-        document.getElementById("card-element").style.backgroundColor = "#ffffff";
-        
-        
-        
-        
-        
-        
+
         card.mount("#card-element");
 
         const form = document.getElementById("payment-form");
         const resultDiv = document.getElementById("payment-result");
-        const sTotalElement = document.getElementById("s-totall");
         const hiddenAmountInput = document.getElementById("amount");
 
         function updateHiddenAmount() {
-            const totalAmount = parseFloat(sTotalElement.textContent) || 0.0;
+            const totalAmount = parseFloat(document.getElementById("s-totall").textContent) || 0.0;
             hiddenAmountInput.value = totalAmount.toFixed(2);
-            console.log("Updated Total Amount:", hiddenAmountInput.value);
         }
 
         form.addEventListener("submit", async (event) => {
             event.preventDefault();
             updateHiddenAmount();
 
-            const streetAddress = document.getElementById("biAutoAdderss").value;
-            const aptLine = document.getElementById("biAptName").value.trim();
-            const city = document.getElementById("billingCity").value;
-            const state = document.getElementById("billingState").value;
-            const zip = document.getElementById("billingZipCode").value;
-
-            const cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-
             const payload = {
-            		amount: hiddenAmountInput.value,
-            	    billing_name: document.getElementById("billingFullName").value,
-            	    billing_address_line1: streetAddress,
-            	    billing_address_city: city,
-            	    billing_address_state: state,
-            	    billing_address_zip: zip,
-            	    cartItems: cartItems,
-            	    order_method: localStorage.getItem("orderMethod"),
-            	    deliveryorpickup_date: localStorage.getItem("orderDate"),
-            	    order_time: localStorage.getItem("orderTime"),
-            	    order_address: localStorage.getItem("orderAddress"),
+                amount: hiddenAmountInput.value,
+                billing_name: document.getElementById("billingFullName").value.trim(),
+                billing_address_line1: document.getElementById("biAutoAdderss").value.trim(),
+                billing_address_city: document.getElementById("billingCity").value.trim(),
+                billing_address_state: document.getElementById("billingState").value.trim(),
+                billing_address_zip: document.getElementById("billingZipCode").value.trim(),
+                cartItems: JSON.parse(localStorage.getItem("cartItems")) || [],
+                order_method: localStorage.getItem("orderMethod"),
+                deliveryorpickup_date: localStorage.getItem("orderDate"),
+                order_time: localStorage.getItem("orderTime"),
+                order_address: localStorage.getItem("orderAddress"),
             };
 
-            if (aptLine) {
-                payload.billing_address_line2 = aptLine;
-            }
-
-            console.log("Payload to Server:", payload);
+            console.log("Payload sent to PaymentServlet:", payload);
 
             try {
-                const response = await fetch("<%= request.getContextPath() %>/PaymentServlet", {
+                const paymentResponse = await fetch(`${window.location.origin}/com.foodUser/PaymentServlet`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(payload),
                 });
 
-                const responseData = await response.json();
-
-                if (responseData.error) {
-                    throw new Error(responseData.error);
+                if (!paymentResponse.ok) {
+                    const errorText = await paymentResponse.text();
+                    throw new Error(`PaymentServlet error: ${errorText}`);
                 }
 
-                const { clientSecret } = responseData;
-                const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
-                    payment_method: {
-                        card: card,
-                        billing_details: {
-                            name: payload.billing_name,
-                            address: {
-                                line1: payload.billing_address_line1,
-                                ...(payload.billing_address_line2 && { line2: payload.billing_address_line2 }),
-                                city: payload.billing_address_city,
-                                state: payload.billing_address_state,
-                                postal_code: payload.billing_address_zip,
+                const paymentData = await paymentResponse.json();
+                console.log("Response from PaymentServlet:", paymentData);
+
+                if (paymentData.error) {
+                    throw new Error(paymentData.error);
+                }
+
+                const { clientSecret, success } = paymentData;
+
+                if (success) {
+                    const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+                        payment_method: {
+                            card: card,
+                            billing_details: {
+                                name: payload.billing_name,
+                                address: {
+                                    line1: payload.billing_address_line1,
+                                    city: payload.billing_address_city,
+                                    state: payload.billing_address_state,
+                                    postal_code: payload.billing_address_zip,
+                                },
                             },
                         },
-                    },
-                });
+                    });
 
-                if (error) {
-                    console.error("Stripe Payment Error:", error.message);
+                    if (error) {
+                    	throw new Error("Payment confirmation " + error.message);
 
-                    // Show the error in a popup
-                    let errorMessage;
-                    switch (error.code) {
-                        case "card_declined":
-                            if (error.decline_code === "insufficient_funds") {
-                                errorMessage = "Payment failed due to insufficient funds in your account.";
-                            } else {
-                                errorMessage = "Your card was declined. Please use a different card.";
-                            }
-                            break;
-                        case "expired_card":
-                            errorMessage = "Your card has expired. Please use a different card.";
-                            break;
-                        case "incorrect_cvc":
-                            errorMessage = "Incorrect CVC. Please check and try again.";
-                            break;
-                        case "processing_error":
-                            errorMessage = "An error occurred while processing your payment. Please try again.";
-                            break;
-                        default:
-                            errorMessage = `Payment failed: ${error.message}`;
                     }
 
-                    showErrorPopup(errorMessage); // Call the popup function to display the error message
-                } else if (paymentIntent.status === "succeeded") {
-                    // Handle success
-                    resultDiv.textContent = "Payment successful!";
-                    resultDiv.style.color = "green";
-                    window.location.href = "<%= request.getContextPath() %>/jsp/OrderConfirmation.jsp";
+                    if (paymentIntent && paymentIntent.status === "succeeded") {
+                        console.log("Payment successful, proceeding to order confirmation...");
+
+                        const confirmationResponse = await fetch(`${window.location.origin}/com.foodUser/OrderConfirmationServlet`, {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({ paymentIntentId: paymentIntent.id }),
+                        });
+
+                        if (!confirmationResponse.ok) {
+                            const errorText = await confirmationResponse.text();
+                            throw new Error(`OrderConfirmationServlet error: ${errorText}`);
+                        }
+
+                        const confirmationData = await confirmationResponse.json();
+                        if (confirmationData.success) {
+                            window.location.href = `${window.location.origin}/com.foodUser/jsp/OrderConfirmation.jsp`;
+                        } else {
+                            throw new Error(confirmationData.error);
+                        }
+                    }
                 }
-
-
             } catch (err) {
-                console.error("Payment Error:", err.message);
-                resultDiv.textContent = `Error: ${err.message}`;
-                resultDiv.style.color = "red";
+                console.error("Error:", err.message);
+
+                // Display a modal or inline error message
+                const errorModal = document.getElementById("error-modal");
+                errorModal.querySelector(".modal-body").textContent = err.message;
+                errorModal.style.display = "block";
+
+                // Close modal and refresh page on exit
+                errorModal.querySelector(".close-btn").addEventListener("click", () => {
+                    errorModal.style.display = "none";
+                    window.location.reload();
+                });
             }
         });
 
         updateHiddenAmount();
     });
-    
-    function showErrorPopup(message) {
-        const errorMessageElement = document.getElementById("error-message");
-        errorMessageElement.textContent = message;
-
-        const popup = document.getElementById("error-popup");
-        popup.classList.remove("hidden");
-
-        const closeButton = document.getElementById("close-popup");
-        closeButton.addEventListener("click", function () {
-            popup.classList.add("hidden");
-            location.reload(); // Reload the page on popup close
-        });
-    }
 
     
-    
-    function placeOrder(payload) {
-        fetch("/PaymentServlet", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.clientSecret) {
-                // Clear cart items from localStorage
-                console.log("Before clearing:", localStorage.getItem('cartItems'));
-                localStorage.removeItem('cartItems');
-                localStorage.setItem('cartCount', "0");
-                console.log("After clearing:", localStorage.getItem('cartItems'));
-
-                // Update cart count dynamically
-                const cartCountElement = document.querySelector('#navbar-cart-count');
-                if (cartCountElement) {
-                    cartCountElement.innerText = "0";
-                }
-
-                // Redirect to Order Confirmation Page
-                window.location.href = '/jsp/OrderConfirmation.jsp';
-            } else if (data.error) {
-                console.error("Error: " + data.error);
-                alert("Failed to place the order. Please try again.");
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            alert("Something went wrong. Please try again.");
-        });
-    }
-
-
     document.addEventListener("DOMContentLoaded", function () {
         const cartCountElement = document.querySelector('#navbar-cart-count');
         const storedCartItems = JSON.parse(localStorage.getItem('cartItems')) || [];

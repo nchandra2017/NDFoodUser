@@ -13,14 +13,15 @@ import java.util.UUID;
 public class SquareClientUtil {
 
     // Replace these with your actual access token and location ID
-    private static final String ACCESS_TOKEN = "EAAAl4Cz_u3ccybty9ScPQnhYM3T_t9KGfsRibKEq2xk5D47sYsqBxtpwWYLIVz_";
-    private static final String LOCATION_ID = "LMB2QPXBV39RX";
+    private static final String ACCESS_TOKEN = "";
+    private static final String LOCATION_ID = "";
 
     // Square Client instance
     private final SquareClient squareClient;
 
     // Constructor to initialize Square Client
-    public SquareClientUtil() {
+    @SuppressWarnings("deprecation")
+	public SquareClientUtil() {
         this.squareClient = new SquareClient.Builder()
                 .environment(Environment.SANDBOX) // Use Environment.PRODUCTION for live transactions
                 .accessToken(ACCESS_TOKEN)
