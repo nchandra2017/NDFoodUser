@@ -33,6 +33,7 @@ public class OrderPageServlet extends HttpServlet {
             Integer userId = (Integer) session.getAttribute("userId");
 
             if (userId == null) {
+                System.out.println("Debug: userId is null. Redirecting to SignIn.jsp.");
                 response.sendRedirect(request.getContextPath() + "/jsp/SignIn.jsp");
                 return;
             }

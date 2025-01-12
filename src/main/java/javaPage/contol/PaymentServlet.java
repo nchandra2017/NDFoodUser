@@ -6,6 +6,7 @@ import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,11 +42,11 @@ public class PaymentServlet extends HttpServlet {
         ObjectMapper mapper = new ObjectMapper();
 
         try {
-            // Parse payload
+            // Parse payload from the request
             BufferedReader reader = request.getReader();
             Map<String, Object> payload = mapper.readValue(reader, new TypeReference<Map<String, Object>>() {});
 
-            // Extract details from the payload
+            // Extract total amount and calculate amount in cents
             BigDecimal totalAmount = new BigDecimal(payload.get("amount").toString());
             long amountInCents = totalAmount.multiply(new BigDecimal("100")).longValueExact();
 
@@ -55,9 +56,8 @@ public class PaymentServlet extends HttpServlet {
                 throw new Exception("User ID not found in session.");
             }
 
-            // Retrieve user details
+            // Fetch user details from the database
             String userFirstName = null, userLastName = null, userEmail = null;
-
             try (Connection conn = DataBConnection.getConnection()) {
                 String userQuery = "SELECT firstname, lastname, email FROM users WHERE id = ?";
                 try (PreparedStatement psUser = conn.prepareStatement(userQuery)) {
@@ -82,13 +82,33 @@ public class PaymentServlet extends HttpServlet {
             PaymentIntent paymentIntent = stripeClientUtil.createPaymentIntent(amountInCents, "usd", null);
             String clientSecret = paymentIntent.getClientSecret();
 
+            // Extract and validate cartItems
+            @SuppressWarnings("unchecked")
+            List<Map<String, Object>> cartItems = (List<Map<String, Object>>) payload.get("cartItems");
+            if (cartItems == null || cartItems.isEmpty()) {
+                throw new Exception("Cart items are missing or empty in the payload.");
+            }
+
+            // Log and adapt cart items
+            logger.info("Cart items received: " + cartItems);
+            for (Map<String, Object> item : cartItems) {
+                // Check for required keys in the current structure
+                if (item.get("itemName") == null || item.get("itemPrice") == null || item.get("quantity") == null) {
+                    throw new Exception("Invalid cart item data: " + item);
+                }
+
+                // Adapt keys to match expected structure
+                item.put("itemId", item.get("itemName").hashCode()); // Use hash code of itemName as a placeholder for itemId
+                item.put("price", new BigDecimal(item.get("itemPrice").toString()));
+            }
+
             // Save order details to session
             session.setAttribute("billing_name", payload.get("billing_name"));
             session.setAttribute("billing_address_line1", payload.get("billing_address_line1"));
             session.setAttribute("billing_address_city", payload.get("billing_address_city"));
             session.setAttribute("billing_address_state", payload.get("billing_address_state"));
             session.setAttribute("billing_address_zip", payload.get("billing_address_zip"));
-            session.setAttribute("orderCartItems", payload.get("cartItems"));
+            session.setAttribute("orderCartItems", cartItems); // Save validated cart items
             session.setAttribute("totalAmount", totalAmount);
             session.setAttribute("uniqueOrderId", generateUniqueOrderId());
             session.setAttribute("order_method", payload.get("order_method"));
@@ -142,7 +162,7 @@ public class PaymentServlet extends HttpServlet {
 
     private String generateUniqueOrderId() {
         int randomNum = 2173; // Static prefix number (e.g., 2173)
-        String randomFormat = String.format("%04d-%04d", (int)(Math.random() * 10000), (int)(Math.random() * 10000));
-        return randomNum + "" + randomFormat; // Example: 2173-1234-5678
+        String randomFormat = String.format("%04d-%04d", (int) (Math.random() * 10000), (int) (Math.random() * 10000));
+        return randomNum + "-" + randomFormat; // Example: 2173-1234-5678
     }
 }

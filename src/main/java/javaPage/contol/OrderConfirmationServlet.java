@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -47,13 +48,14 @@ public class OrderConfirmationServlet extends HttpServlet {
             Map<String, Object> payload = mapper.readValue(reader, new TypeReference<Map<String, Object>>() {});
             logger.info("Received payload: " + payload);
 
+            // Validate paymentIntentId
             String paymentIntentId = (String) payload.get("paymentIntentId");
             if (paymentIntentId == null) {
                 handleErrorResponse(response, HttpServletResponse.SC_BAD_REQUEST, "Missing paymentIntentId.");
                 return;
             }
 
-            // Retrieve required session attributes
+            // Retrieve session attributes
             @SuppressWarnings("unchecked")
             List<Map<String, Object>> cartItems = (List<Map<String, Object>>) session.getAttribute("orderCartItems");
             BigDecimal totalAmount = (BigDecimal) session.getAttribute("totalAmount");
@@ -70,60 +72,37 @@ public class OrderConfirmationServlet extends HttpServlet {
             String deliveryDate = (String) session.getAttribute("deliveryorpickup_date");
             String userEmail = (String) session.getAttribute("userEmail");
 
+            // Validate mandatory details
             if (cartItems == null || totalAmount == null || uniqueOrderId == null || billingName == null || rawOrderTime == null || deliveryDate == null) {
                 handleErrorResponse(response, HttpServletResponse.SC_BAD_REQUEST, "Order details are incomplete.");
                 return;
             }
 
-            // Convert date to database format
+            // Convert date and time to proper formats
             try {
                 deliveryDate = convertToDatabaseDateFormat(deliveryDate);
-                logger.info("Converted delivery date: " + deliveryDate);
+                rawOrderTime = convertTo24HourFormat(rawOrderTime);
             } catch (ParseException e) {
-                logger.log(Level.SEVERE, "Error converting delivery date to database format", e);
-                handleErrorResponse(response, HttpServletResponse.SC_BAD_REQUEST, "Invalid date format.");
+                logger.log(Level.SEVERE, "Error converting date/time format", e);
+                handleErrorResponse(response, HttpServletResponse.SC_BAD_REQUEST, "Invalid date or time format.");
                 return;
             }
 
-            // Convert order time to 24-hour format
-            String orderTime;
-            try {
-                orderTime = convertTo24HourFormat(rawOrderTime);
-            } catch (ParseException e) {
-                logger.log(Level.SEVERE, "Error converting order time to 24-hour format", e);
-                handleErrorResponse(response, HttpServletResponse.SC_BAD_REQUEST, "Invalid time format.");
-                return;
-            }
-
-            // Insert order into the database
+            // Insert order and order items into the database
             try (Connection conn = DataBConnection.getConnection()) {
                 conn.setAutoCommit(false);
 
-                String insertOrderSQL = "INSERT INTO orders (user_id, total_amount, billing_name, address_line1, address_line2, city, state, zip, order_date, order_time, order_method, order_address, deliveryorpickup_date, unique_order_id) "
-                        + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?, ?, ?, ?)";
-                try (PreparedStatement psOrder = conn.prepareStatement(insertOrderSQL, PreparedStatement.RETURN_GENERATED_KEYS)) {
-                    psOrder.setInt(1, (Integer) session.getAttribute("userId"));
-                    psOrder.setBigDecimal(2, totalAmount);
-                    psOrder.setString(3, billingName);
-                    psOrder.setString(4, addressLine1);
-                    psOrder.setString(5, addressLine2);
-                    psOrder.setString(6, city);
-                    psOrder.setString(7, state);
-                    psOrder.setString(8, zip);
-                    psOrder.setString(9, orderTime);
-                    psOrder.setString(10, orderMethod);
-                    psOrder.setString(11, orderAddress);
-                    psOrder.setString(12, deliveryDate);
-                    psOrder.setString(13, uniqueOrderId);
+                // Insert order details
+                int orderId = insertOrder(conn, session, totalAmount, billingName, addressLine1, addressLine2, city, state, zip, rawOrderTime, orderMethod, orderAddress, deliveryDate, uniqueOrderId);
 
-                    psOrder.executeUpdate();
-                }
+                // Insert order items
+                insertOrderItems(conn, cartItems, orderId);
 
                 conn.commit();
-                logger.info("Order inserted successfully with uniqueOrderId: " + uniqueOrderId);
+                logger.info("Order and items inserted successfully with uniqueOrderId: " + uniqueOrderId);
             }
 
-            // Send confirmation email if userEmail is present
+            // **Send confirmation email if userEmail is present**
             if (userEmail != null && !userEmail.isEmpty()) {
                 logger.info("Sending order confirmation email to: " + userEmail);
                 EmailUtility.sendOrderConfirmationEmail(userEmail, billingName, uniqueOrderId, totalAmount.doubleValue(), cartItems);
@@ -131,13 +110,93 @@ public class OrderConfirmationServlet extends HttpServlet {
                 logger.warning("No userEmail found in session. Skipping email sending.");
             }
 
-            // Respond with success
+            // **Respond with success**
             sendJsonResponse(response, Map.of("success", true));
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Error during order confirmation", e);
             handleErrorResponse(response, HttpServletResponse.SC_INTERNAL_SERVER_ERROR, mapDatabaseErrorToMessage(e.getMessage()));
         }
     }
+
+    private int insertOrder(Connection conn, HttpSession session, BigDecimal totalAmount, String billingName,
+                            String addressLine1, String addressLine2, String city, String state, String zip,
+                            String orderTime, String orderMethod, String orderAddress, String deliveryDate,
+                            String uniqueOrderId) throws Exception {
+        String insertOrderSQL = "INSERT INTO orders (user_id, total_amount, billing_name, address_line1, address_line2, city, state, zip, order_date, order_time, order_method, order_address, deliveryorpickup_date, unique_order_id) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?, ?, ?, ?)";
+        try (PreparedStatement psOrder = conn.prepareStatement(insertOrderSQL, PreparedStatement.RETURN_GENERATED_KEYS)) {
+            psOrder.setInt(1, (Integer) session.getAttribute("userId"));
+            psOrder.setBigDecimal(2, totalAmount);
+            psOrder.setString(3, billingName);
+            psOrder.setString(4, addressLine1);
+            psOrder.setString(5, addressLine2);
+            psOrder.setString(6, city);
+            psOrder.setString(7, state);
+            psOrder.setString(8, zip);
+            psOrder.setString(9, orderTime);
+            psOrder.setString(10, orderMethod);
+            psOrder.setString(11, orderAddress);
+            psOrder.setString(12, deliveryDate);
+            psOrder.setString(13, uniqueOrderId);
+            psOrder.executeUpdate();
+
+            try (ResultSet rs = psOrder.getGeneratedKeys()) {
+                if (rs.next()) {
+                    return rs.getInt(1);
+                } else {
+                    throw new Exception("Failed to retrieve generated order ID.");
+                }
+            }
+        }
+    }
+
+    private void insertOrderItems(Connection conn, List<Map<String, Object>> cartItems, int orderId) throws Exception {
+        String fetchItemIdSQL = "SELECT item_id FROM items WHERE item_name = ?";
+        String insertItemsSQL = "INSERT INTO order_items (order_id, item_id, quantity, price, item_name) VALUES (?, ?, ?, ?, ?)";
+
+        try (PreparedStatement psFetchItemId = conn.prepareStatement(fetchItemIdSQL);
+             PreparedStatement psInsertItems = conn.prepareStatement(insertItemsSQL)) {
+
+            logger.info("Cart items received for insertion: " + cartItems);
+
+            for (Map<String, Object> item : cartItems) {
+                // Extract required fields
+                String itemName = (String) item.get("itemName");
+                Integer quantity = (Integer) item.get("quantity");
+                BigDecimal price = new BigDecimal(item.get("price").toString());
+
+                // Validate fields
+                if (itemName == null || quantity == null || price == null) {
+                    logger.severe("Invalid cart item data: " + item);
+                    throw new Exception("Cart item contains null or invalid values: " + item);
+                }
+
+                // Fetch itemId from the database
+                psFetchItemId.setString(1, itemName);
+                try (ResultSet rs = psFetchItemId.executeQuery()) {
+                    if (!rs.next()) {
+                        throw new Exception("Item not found in database: " + itemName);
+                    }
+                    int itemId = rs.getInt("item_id");
+
+                    // Bind values to the SQL statement
+                    psInsertItems.setInt(1, orderId);
+                    psInsertItems.setInt(2, itemId);
+                    psInsertItems.setInt(3, quantity);
+                    psInsertItems.setBigDecimal(4, price);
+                    psInsertItems.setString(5, itemName);
+
+                    psInsertItems.addBatch();
+                }
+            }
+
+            // Execute batch insertion
+            psInsertItems.executeBatch();
+            logger.info("Order items successfully inserted for orderId: " + orderId);
+        }
+    }
+
+
 
     private String convertToDatabaseDateFormat(String dateInMMDDYYYY) throws ParseException {
         SimpleDateFormat inputFormat = new SimpleDateFormat("MM-dd-yyyy");
@@ -151,6 +210,16 @@ public class OrderConfirmationServlet extends HttpServlet {
         return outputFormat.format(inputFormat.parse(timeIn12HourFormat));
     }
 
+    private String mapDatabaseErrorToMessage(String errorMessage) {
+        if (errorMessage.contains("constraint_violation")) {
+            return "The order details failed to meet the database constraints. Please check your input.";
+        } else if (errorMessage.contains("data_truncation")) {
+            return "Some input data was too long or invalid. Please verify your details.";
+        } else {
+            return "An unexpected error occurred while processing your order. Please try again.";
+        }
+    }
+
     private void sendJsonResponse(HttpServletResponse response, Object data) throws IOException {
         response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_OK);
@@ -162,15 +231,5 @@ public class OrderConfirmationServlet extends HttpServlet {
         response.setContentType("application/json");
         response.setStatus(statusCode);
         response.getWriter().write(new ObjectMapper().writeValueAsString(Map.of("error", errorMessage)));
-    }
-
-    private String mapDatabaseErrorToMessage(String errorMessage) {
-        if (errorMessage.contains("constraint_violation")) {
-            return "The order details failed to meet the database constraints. Please check your input.";
-        } else if (errorMessage.contains("data_truncation")) {
-            return "Some input data was too long or invalid. Please verify your details.";
-        } else {
-            return "An unexpected error occurred while processing your order. Please try again.";
-        }
     }
 }
