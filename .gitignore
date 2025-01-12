@@ -1,0 +1,20 @@
+# Ignore Maven target directory
+/target
+
+# Ignore IDE-specific files
+*.iml
+.classpath
+.project
+.settings/
+.idea/
+.vscode/
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore log files
+*.log
+
+# Ignore compiled files
+*.class
