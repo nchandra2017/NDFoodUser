@@ -1,0 +1,260 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+}
+
+#order-sidebar-dialog {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0; /* Align to the right */
+    width: 450px; /* Adjust as needed */
+    height: 100vh; /* Full height of the viewport */
+    background-color: white;
+    box-shadow: -4px 0 8px rgba(0, 0, 0, 0.3); /* Shadow effect for sidebar */
+    z-index: 1000; /* Ensure it's above other content */
+    border-left: 1px solid #ccc; /* Optional border */
+    overflow-y: auto; /* Enable scrolling if content exceeds viewport height */
+    padding: 20px; /* Padding for content inside */
+}
+
+.order-sidebar-content {
+    max-width: 450px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    position: relative;
+    
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #333;
+}
+
+h2 {
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    font-size: 18px;
+}
+
+.order-item {
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+    padding: 5px;
+    color: #000;
+    font-size: 14px;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    margin-left: 5px;
+    margin-bottom: 5px;
+    font-size: 14px;
+}
+
+.quantity-controls button {
+    width: 24px;
+    height: 24px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 0 5px;
+}
+
+.total-price {
+    font-weight: bold;
+    margin-top: 5px;
+}
+
+.delete-btn {
+    font-size: 10px;
+    color: #f00;
+    cursor: pointer;
+}
+
+.total-row {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.subtotal-row {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+.checkout-btn-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.checkout-btn {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+/* Base styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0; /* Removed padding */
+    height: 100%; /* Ensure the body takes full height */
+}
+
+#order-sidebar-dialog {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 450px;
+    height: 100vh; /* Full height */
+    background-color: #fff;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: none;
+    overflow-y: auto; /* Enable scrolling */
+    padding: 0; /* Remove any default padding */
+}
+
+
+/* Pickup and Delivery Buttons */
+.order-method {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.order-method-btn {
+    background: linear-gradient(to bottom, #00FF00, #4CAF50); /* Green glossy effect */
+    color: white;
+    border: 2px solid #004d00; /* Darker green border */
+    padding: 5px 15px;
+    cursor: pointer;
+    margin: 5px;
+    border-radius: 10px; /* Rounded corners */
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3); /* Shadow for a 3D effect */
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+}
+
+.order-method-btn:hover {
+    background: linear-gradient(to bottom, #00e600, #004d00); /* Lighter green on hover */
+    transform: scale(1.05); /* Slight zoom-in effect on hover */
+}
+
+.order-method-btn:active {
+    background: linear-gradient(to bottom, #004d00, #00FF00); /* Reverse gradient on click */
+    box-shadow: inset 2px 2px 5px rgba(0, 0, 0, 0.2); /* Inner shadow for pressed effect */
+}
+
+
+
+/* Mobile view adjustments */
+@media (max-width: 768px) {
+    #order-sidebar-dialog {
+        width: 90%; /* Full width on mobile */
+        height: 100vh; /* Full height of viewport */
+        margin: 0; /* Remove any margins */
+        padding: 0; /* Remove any padding */
+        top: 0;
+        bottom: 0;
+    }
+    
+    /* Ensure that the content inside the sidebar also fits properly */
+    .order-sidebar-content {
+        padding: 15px;
+        margin: 0; /* Remove any margin */
+        width: 100%;
+        box-sizing: border-box;
+    }
+    
+    /* Adjust button and spacing for mobile */
+    .checkout-btn-container {
+        margin: 0; /* Remove extra margin at the bottom */
+    }
+
+    .checkout-btn {
+        width: 100%; /* Make the button take full width */
+        margin-bottom: 0; /* Remove margin below the button */
+    }
+    .total-row {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    margin-top: 10px;
+    font-size: 10px;
+}
+}
+
+/* Additional styles for order item, buttons, etc. */
+.item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+}
+
+.checkout-btn-container {
+    text-align: center;
+    margin-top: 10px; /* Adjust margin for spacing above the button */
+}
+
+.checkout-btn {
+    padding: 10px 20px;
+    background: linear-gradient(to bottom, red, black); /* Green glossy effect */
+    color: white;
+     border: 2px solid #004d00; /* Darker green border */
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    width: 90%;
+     box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3); /* Shadow for a 3D effect */
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.3); /* Shadow for a 3D effect */
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+
+}
+ .checkout-btn:hover {
+     background: linear-gradient(to bottom, #00e600, #004d00); /* Lighter green on hover */
+    transform: scale(1.05); /* Slight zoom-in effect on hover */
+}
+ 
+
+@media only screen and (max-width: 600px) {
+    .order-sidebar-content {
+        padding: 5px;
+    }
+}

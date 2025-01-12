@@ -1,0 +1,191 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Body Styling */
+body {
+    background-color: #f4f4f4;
+    min-height: 100vh;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Image Styling */
+.image {
+    display: block;
+    max-width: 100%; /* Makes sure the image fits the screen */
+    height: 300px;
+    margin-top: -250px;
+   
+    
+}
+
+/* Iframe Container Styling */
+.iframe-container {
+    display: flex;
+    justify-content: space-between; /* Space between the two iframes */
+    align-items: flex-start; /* Align the iframes at the top */
+    margin: 30px 20px; /* Margin for spacing around the container */
+}
+
+/* First Iframe: Category List */
+#category-frame {
+    width: 20%; /* Adjust width of the category iframe */
+    min-height: 250vh; /* Fixed height */
+    border: 1px solid #ddd;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Second Iframe: Items List (Hidden initially) */
+#items-frame {
+    width: 200%; /* Adjust width of the items iframe */
+    min-height: 250vh; /* Fixed height */
+    border: 1px solid #ddd;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    display: none; /* Initially hidden */
+}
+
+
+ .back-to-category-btn {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    background-color: transparent;
+    border: none;
+    font-size: 16px;
+    color: #333;
+    cursor: pointer;
+    padding: 10px;
+    font-weight: bold;
+    z-index: 1000;
+}
+
+
+
+ #preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #ffffff; /* Background color */
+        z-index: 9999; /* Ensure it's on top of everything else */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .loader {
+        width: 60px;
+        height: 60px;
+        border: 8px solid #f3f3f3;
+        border-top: 8px solid #3498db;
+        border-radius: 50%;
+        animation: spin 1.5s linear infinite;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
+    }
+
+    /* Ensure smooth visibility of the page once the preloader is gone */
+    body {
+        opacity: 1;
+        transition: opacity 0.5s ease;
+    }
+
+        
+        
+        
+
+        /* Only display the hamburger icon on mobile screens */
+        @media screen and (max-width: 768px) {
+             .back-to-category-btn {
+                display: none; /* Hidden by default, shown when category is clicked */
+            }
+
+            /* Adjust iframe position to avoid overlap with the button */
+            .iframe-container #items-frame {
+                margin-top: 80px;
+            }
+        }
+
+        /* Ensure the button is hidden on larger screens */
+        @media screen and (min-width: 769px) {
+             .back-to-category-btn {
+                display: none !important;
+            }
+        }
+   
+   
+/* Responsive Styles */
+@media screen and (max-width: 1200px) {
+    .iframe-container {
+        flex-direction: column; /* Stack the iframes on top of each other */
+        align-items: center;
+        margin-top: 0px;
+        
+    }
+
+    #category-frame, #items-frame {
+        width: 100%; /* Full width on smaller screens */
+        height: 500px; /* Adjust height */
+        margin-bottom: 20px; /* Space between the iframes */
+        
+    }
+    
+}
+
+/* Mobile View Adjustments */
+@media screen and (max-width: 768px) {
+    /* Hide the image on mobile */
+    .image {
+        display: none; /* Hide image on smaller screens */
+    }
+
+   
+    /* Mobile adjustments for iframes */
+    #category-frame, #items-frame {
+        width: 120%; /* Full width for mobile view */
+        height: 450px; /* Adjusted height */
+        margin-bottom: 15px; /* Space between iframes */
+    }
+    .back-to-category-btn {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 50px;
+    left: 0px;
+    
+    border: none;
+    font-size: 16px;
+    color: red; /* White text */
+    cursor: pointer;
+    padding: 1px 2px;
+    font-weight: bold;
+    z-index: 1000;
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Add a slight shadow */
+}
+
+.back-to-category-btn i {
+    margin-right: 5px; /* Space between the icon and text */
+}
+
+
+.back-icon {
+    width: 45px; /* Adjust size as needed */
+    height: 14px; /* Adjust size as needed */
+}
+}

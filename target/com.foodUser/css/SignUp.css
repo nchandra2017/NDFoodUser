@@ -1,0 +1,217 @@
+body {
+    background-color: #ffffff;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+}
+
+.signup-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f9f9f9;
+}
+
+.signup-form-box {
+    background-color: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 400px;
+}
+
+.signup-form-box h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #000080;
+}
+
+.form-group {
+    margin-bottom: 20px;
+    position: relative; /* Ensure proper alignment for icons */
+}
+
+.form-group label {
+    font-size: 14px;
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    padding-right: 40px; /* Space for the eye icon */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.form-group input:focus {
+    border-color: #007BFF;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Eye Icon for Password Field */
+.password-wrapper #togglePassword {
+    position: absolute;
+     top: 55px;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 16px;
+    color: #888;
+    transition: color 0.3s ease;
+    margin-top: 5px; /* Adds spacing between the icon and input field */
+}
+
+/* Eye Icon for Confirm Password Field */
+.password-wrapper #toggleConfirmPassword {
+    position: absolute;
+    top: 36px;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 16px;
+    color: #888;
+    transition: color 0.3s ease;
+    margin-top: 5px; /* Adds spacing between the icon and input field */
+}
+
+
+.helper-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+    word-wrap: break-word; 
+    white-space: normal; 
+}
+
+
+.error-message {
+    color: red;
+    font-size: 12px;
+    margin-top: 5px;
+    display: none;
+}
+
+.success-message {
+    color: green;
+    margin-bottom: 15px;
+    text-align: center;
+    font-size: 16px;
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out, max-height 0.5s ease-in-out;
+    max-height: 100px;
+    overflow: hidden;
+}
+#confirmPassword {
+    
+    margin-top: 20px; 
+}
+.success-message.hidden {
+    opacity: 0;
+    max-height: 0;
+    margin-bottom: 0;
+}
+
+.success-message a {
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.signup-btn {
+    width: 100%;
+    background: linear-gradient(to bottom, red, black);
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.signup-btn:hover {
+    background-color: #e45c00;
+}
+
+.signup-form-box p {
+    text-align: center;
+    margin-top: 10px;
+    color: #000080;
+}
+
+.signup-form-box p a {
+    color: #ff6600;
+    text-decoration: underline;
+}
+
+.signup-form-box p a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .signup-form-box {
+        width: 100%; /* Adjust width for smaller screens */
+        padding: 20px; /* Compact design for mobile */
+    }
+
+    .signup-form-box h2 {
+        font-size: 20px; /* Adjust heading size */
+    }
+
+    .form-group input {
+        font-size: 14px; /* Adjust input text size */
+        padding: 8px; /* Compact padding */
+    }
+
+    .signup-btn {
+        font-size: 16px; /* Adjust button size */
+        padding: 10px;
+    }
+
+    .signup-form-box p {
+        font-size: 14px;
+    }
+   .helper-message {
+    color: red;
+    font-size: 9px;
+    margin-top: 5px;
+    word-wrap: break-word; 
+    white-space: normal; 
+   
+}
+
+    /* Eye Icon for Password Field */
+.password-wrapper #togglePassword {
+    position: absolute;
+    top: 50px;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 16px;
+    color: #888;
+    transition: color 0.3s ease;
+    margin-top: 5px; /* Adds spacing between the icon and input field */
+}
+
+/* Eye Icon for Confirm Password Field */
+.password-wrapper #toggleConfirmPassword {
+    position: absolute;
+    top: 34px;
+    right: 10px;
+    transform: translateY(-50%);
+    cursor: pointer;
+    font-size: 16px;
+    color: #888;
+    transition: color 0.3s ease;
+    margin-top: 5px; /* Adds spacing between the icon and input field */
+}
+
+}
