@@ -14,7 +14,7 @@
 <nav class="navbar">
     <div class="logo">
         <img src="<%=request.getContextPath()%>/images/R Logo.png" alt="Logo">
-        <span class="logo-text">ND BANGALI FOOD</span>
+        <span class="logo-text">ND BENGALI FOOD</span>
     </div>
     
     <!-- Hamburger Icon for Mobile -->

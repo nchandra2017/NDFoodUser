@@ -1,0 +1,94 @@
+ .popupmassege {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0px 10px 20px red;
+            padding: 15px;
+            
+            
+            
+        }
+       
+        .popup-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+       
+    .image-container img {
+    width:100%; /* Adjust size as needed */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 0; /* Ensure no rounding */
+    display: block; /* Remove inline spacing if necessary */
+}
+
+
+
+
+
+       
+
+        .welcome-poptext h5 {
+            font-size: 24px;
+            margin-top:10px;
+            margin-bottom: 5px;
+            color: red;
+            font-weight: bold;
+            text-align:center;
+        }
+
+        .welcome-poptext p {
+            font-size: 16px;
+            margin: 0;
+            color: red;
+            line-height: 1.5;
+            text-align:center;
+        }
+
+       
+        
+
+        .closePopupB{
+            margin-top: 10px;
+            padding: 5px 10px;
+            font-size: 1rem;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-left:300px;
+        }
+
+        .closePopupB:hover {
+            background-color: red;
+            color: white;
+        }
+        @media (max-width: 768px) and (orientation: portrait) {
+          .closePopupB {
+        margin-left:280px; /* Stack cards in one column */
+    }
+     .popupmassege {
+         
+            width: 90%;
+            max-width: 400px;
+          
+            
+        }
+    
+     .image-container img {
+    width: 100%; /* Adjust size as needed */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 0; /* Ensure no rounding */
+    display: block; /* Remove inline spacing if necessary */
+}
+}

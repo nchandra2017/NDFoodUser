@@ -1,4 +1,4 @@
-  body {
+body {
     margin: 0;
     padding: 0;
 }
@@ -8,20 +8,19 @@
     padding: 20px;
 }
 
-    
 /* Base styles */
 .navbar {
-    position: fixed; /* Fixes the navbar to the top */
-    top: 0; /* Aligns the navbar to the top of the viewport */
-    width: 100%; /* Ensures the navbar spans the entire width */
-    z-index: 1000; /* Places the navbar above all other elements */
+    position: fixed; /* Fix to the top */
+    top: 0;
+    width: 100%; /* Full width */
+    z-index: 1000; /* Place it above other elements */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 0px;
-    background-color: white; /* Ensure the navbar has a background to prevent transparency issues */
-    box-shadow: 0 8px 15px #ccc; /* Shadow for visual separation */
-    
+    padding: 10px 20px;
+    background-color: white; /* Solid background */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    overflow-x: hidden; /* Prevent horizontal overflow */
 }
 
 .logo {
@@ -30,12 +29,12 @@
 }
 
 .logo img {
-    height: 40px;
+    height: 20px;
     margin-right: 10px;
 }
 
 .logo-text {
-    font-size: 20px;
+    font-size: 14px;
     font-weight: bold;
     color: red;
 }
@@ -55,8 +54,6 @@
     padding: 8px 15px;
     border-radius: 5px; /* Add a subtle rounded corner */
     transition: transform 0.3s ease, box-shadow 0.3s ease, color 0.3s ease;
-    background-color: #fff; /* Default background color */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle shadow for non-hover state */
 }
 
 .navigation-links a:hover {
@@ -69,8 +66,9 @@
 
 .navigation-links a i {
     position: relative;
-     margin-right: 8px; 
+    margin-right: 8px; 
 }
+
 #navbar-cart-count {
     position: absolute;
     top: -8px; 
@@ -83,6 +81,7 @@
     padding: 2px 5px; 
     display: inline-block;
 }
+
 .navigation-links {
     display: flex;
     list-style: none;
@@ -92,7 +91,6 @@
 }
 
 .navigation-links li {
-   
     margin-top: 5px;
 }
 
@@ -100,10 +98,9 @@
     margin-top: px;
     text-decoration: none;
     color: red;
-    font-size: 16px;
-    padding: 10px 25px; /* Adds clickable padding around text */
+    font-size: 12px;
+   
 }
-
 
 .hamburger {
     display: none;
@@ -114,8 +111,8 @@
 .hamburger i {
     margin-top:-10px;
     font-size: 20px;
-    
 }
+
 /* Account dropdown styles */
 .account-dropdown {
     position: relative;
@@ -152,14 +149,9 @@
     text-align: left;
     color: red;
     font-size:14px;
-    
-    
-    
-   
 }
 
 .dropdown-content a:hover {
-       
     text-decoration: underline;
 }
 
@@ -191,107 +183,95 @@
     }
 }
 
-
-
-
-
-/* Mobile view adjustments */
 @media (max-width: 768px) {
-	 .navbar {
-        position: fixed; /* Keep it fixed for mobile */
+    /* Navbar adjustments */
+    .navbar {
+        position: fixed; /* Keep it fixed at the top */
         top: 0;
-        width: 100%; /* Ensure full width on mobile */
-        z-index: 1001; /* Ensure it stays above other elements */
+        width: 100%; /* Full width for mobile */
+        z-index: 1001; /* Ensure it stays on top */
         padding: 10px 20px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        background-color: white; /* Solid background to prevent transparency */
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Slight shadow for separation */
     }
 
-     
-   
-    
-    
+    /* Logo adjustments */
+    .logo img {
+        height: 30px; /* Smaller logo for mobile */
         
-     
-
-.navigation-links.active {
-        
-    right: 0; /* Slide-in effect on activation */
     }
-    
-.logo img {
-    height: 25px;
-    
-   
-}
 
-.logo-text {
-    font-size: 14px;
-    font-weight: bold;
-    color: red;
-}
-   
+    .logo-text {
+        display: none; /* Hide the title */
+    }
 
-     .navigation-links {
+
+    /* Hamburger menu */
+    .hamburger {
+        display: block; /* Show hamburger menu in mobile view */
+        position: absolute;
+        right: 15px;
+        top: 15px;
+        font-size: 20px;
+        cursor: pointer;
+    }
+
+    /* Navigation links for mobile */
+    .navigation-links {
         display: flex;
         flex-direction: column;
         position: fixed;
-        top: 47px; /* Adjust this to match your navbar height */
-        right: -70%; /* Initially off-screen */
-        height: calc(100% - 50px); /* Subtract the height of the navbar */
-        width: 65%; 
-        background-color: #fff;
-        box-shadow: -4px 0 6px rgba(0, 0, 0, 0.1);
-        
-        margin: 0; /* Ensure no margin */
-        transition: right 0.3s ease-in-out; /* Fly-in effect */
-        z-index: 1000; /* Keep it below the navbar */
-         
+        top: 60px; /* Adjust to match navbar height */
+        right: -70%; /* Hidden initially, off-screen */
+        height: calc(100% - 60px); /* Full height minus navbar */
+        width: 70%; /* Width of the sidebar */
+        background-color: white; /* White background for links */
+        box-shadow: -4px 0 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        transition: right 0.3s ease-in-out; /* Smooth slide-in animation */
+        z-index: 1000; /* Ensure it stays above other elements */
     }
-    .navigation-links a {
-    margin-top: -10px;
-    text-decoration: none;
-    color: black;
-    font-size: 12px;
-    padding: 5px 10px;
-    text-align: left; 
-    display: block; 
-    box-shadow: none;
-}
 
-
-.navigation-links a:hover {
-        text-decoration: underline; 
-    
-        
-    }
     .navigation-links.active {
-        right: 0; 
-        
-        
-        
+        right: 0; /* Slide in when active */
+    }
+
+    .navigation-links a {
+        font-size: 14px; /* Slightly larger text for readability */
+        padding: 12px 20px; /* More padding for better touch interaction */
+        color: black; /* Neutral text color */
+        text-align: left; /* Align text to the left */
+        text-decoration: none; /* Remove underline */
+    }
+
+    .navigation-links a:hover {
+        text-decoration: underline; /* Highlight link on hover */
     }
 
     .navigation-links li {
-        margin: 10px 0;
-        text-align: center;
+        margin: 10px 0; /* Add spacing between links */
     }
 
-    .hamburger {
-        display: block; 
-        position: absolute;
-        right: 10px; 
-        top: 15px;
-    }
+    /* Signout button in mobile view */
     .mobile-signout {
-        display: block;
+        display: block; /* Show signout link in mobile view */
         text-align: center;
-        margin: 10px 0;
-        color: #000; /* Adjust the color to fit your theme */
+        margin: 15px 0;
         font-size: 16px;
+        color: red; /* Signout button color */
         text-decoration: none;
     }
-    
+
     .mobile-signout i {
         margin-right: 5px;
+    }
+}
+@media (max-width: 347px) and (max-width: 814px) {
+ 
+ .navigation-links {
+        display: none; /* Hide links */
+    }
+
+     .logo-text {
+        display: none; /* Hide the title */
     }
 }
