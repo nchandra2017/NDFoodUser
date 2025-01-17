@@ -5,75 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Menu Category List</title>
-    <style>
-        .menu-category-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            
-        }
-
-        .menu-category-list {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            max-width: 600px;
-        }
-
-        .menu-category-list li {
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: #f4f4f4;
-            border: 1px solid #ccc;
-            border-radius: 10px;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .menu-category-list li:hover {
-            transform: translateY(-5px);
-            background-color: #f4f4f4;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
-            border: 1px solid red;
-        }
-
-        .menu-category-link {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: black;
-            font-weight: bold;       
-            
-        }
-
-        .menu-category-image {
-            width: 80px;
-            height: 60px;
-            object-fit: cover;
-            margin-right: 20px;
-            border-right: 1px solid #ccc;
-        }
-
-        .menu-category-name {
-            flex: 1;
-            padding: 10px;
-            font-size: 14px;
-            
-        }
-
-        .select-category-heading {
-            font-size: 24px;
-            font-weight: bold;
-            text-align: center;
-            margin-bottom: 20px;
-            color: red;
-        }
-     
-    </style>
+    
+     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/menu-category.css">
+     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/menuItempage.css">
 </head>
 <body>
     <div class="menu-category-container">

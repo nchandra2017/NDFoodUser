@@ -11,7 +11,9 @@
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/navbar.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/footer.css"> 
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/menu.css">
+      <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/menuItempage.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
 
 </head>
 

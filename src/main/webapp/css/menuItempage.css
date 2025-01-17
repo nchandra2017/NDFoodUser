@@ -9,9 +9,11 @@ body {
 
 /* Category Container Styles */
 .category-container {
+    margin-top: 25px;
     display: flex;
     align-items: center;
     margin-bottom: 30px;
+    margin-left:0px
 }
 
 .category-container img {
@@ -19,10 +21,11 @@ body {
     height: 150px;
     border-radius: 8px;
     margin-right: 20px;
+    
 }
 
 .category-container h2 {
-    font-size: 28px;
+    font-size: 20px;
     color: #061668;
 }
 
@@ -43,7 +46,7 @@ body {
 
 .item-header h3 {
     margin: 0;
-    font-size: 22px;
+    font-size: 20px;
     color: #2a2a2a;
     font-weight: bold;
 }
@@ -105,9 +108,9 @@ body {
 
     /* Smaller Category Image for Mobile */
     .category-container img {
-        width: 100px;
+        width: 150px;
         height: auto;
-        margin-left: 15px;
+        
     }
 
     /* Adjust Category Heading Size */
@@ -117,9 +120,8 @@ body {
 
     /* Full-width Item Container */
     .item-container {
-        max-width: 100%;
-        margin: 10px 5px;
         padding: 15px;
+        margin-left:-10px;
     }
 
     /* Adjust Item Header and Details */
@@ -129,13 +131,15 @@ body {
 
     .item-details .price,
     .item-details .description {
-        font-size: 10px;
+        font-size: 12px;
+        margin-left:5px
     }
 
     /* Reduce Gap and Font Size for Add to Order Button */
     .add-to-order-btn {
         font-size: 14px;
         padding: 5px 7px;
+        margin-left:130px;
     }
 
     /* Image and Iframes */
@@ -186,8 +190,7 @@ body {
     background: white;
     padding: 20px;
     border-radius: 10px;
-    max-width: 400px;
-    width: 90%;
+    width: 30%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     text-align: center;
     position: relative;
@@ -200,7 +203,7 @@ body {
             position: absolute;
             top: 10px;
             right: 15px;
-            font-size: 18px;
+            font-size: 15px;
             cursor: pointer;
         }
 
@@ -364,19 +367,19 @@ body {
 .additional-info label {
     margin-right: 10px; /* Space between label and input in desktop view */
     font-weight: bold;
-    font-size: 15px;
+    font-size: 12px;
     color: black; /* Color of the label text */
 }
 
 .additional-info input[type="text"] {
-    padding: 8px 12px;
-    font-size: 14px;
+    padding: 8px 10px;
+    font-size: 12px;
     border: 1px solid #ddd;
     border-radius: 5px; /* Rounded corners */
     outline: none;
     transition: border-color 0.3s ease; /* Smooth border transition */
-    width: 100%;
-    max-width: 200px; /* Adjust width as needed */
+    width: 50%;
+    
 }
 
 .additional-info input[type="text"]::placeholder {
@@ -413,7 +416,7 @@ body {
     background-color: #ccc; /* Initially greyed out */
     color: #fff;
     padding: 10px 20px;
-    font-size: 16px;
+    font-size: 12px;
     border-radius: 5px;
     display: flex;
     align-items: center;

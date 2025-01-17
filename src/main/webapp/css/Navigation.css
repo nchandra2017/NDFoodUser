@@ -75,7 +75,7 @@ body {
     right: -10px; 
     background-color: red;
     color: white;
-    font-size: 12px;
+    font-size: 8px;
     font-weight: bold;
     border-radius: 50%;
     padding: 2px 5px; 
@@ -221,7 +221,7 @@ body {
         display: flex;
         flex-direction: column;
         position: fixed;
-        top: 60px; /* Adjust to match navbar height */
+        top: 50px; /* Adjust to match navbar height */
         right: -70%; /* Hidden initially, off-screen */
         height: calc(100% - 60px); /* Full height minus navbar */
         width: 70%; /* Width of the sidebar */

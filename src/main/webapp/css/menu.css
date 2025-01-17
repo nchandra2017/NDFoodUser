@@ -31,12 +31,12 @@ body {
     display: flex;
     justify-content: space-between; /* Space between the two iframes */
     align-items: flex-start; /* Align the iframes at the top */
-    margin: 30px 20px; /* Margin for spacing around the container */
+    margin: 50px 10px; /* Margin for spacing around the container */
 }
 
 /* First Iframe: Category List */
 #category-frame {
-    width: 20%; /* Adjust width of the category iframe */
+    width: 50%; /* Adjust width of the category iframe */
     min-height: 250vh; /* Fixed height */
     border: 1px solid #ddd;
     box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
@@ -118,7 +118,8 @@ body {
 
             /* Adjust iframe position to avoid overlap with the button */
             .iframe-container #items-frame {
-                margin-top: 80px;
+                margin-top: 90px;
+                max-width:100%;
             }
         }
 
@@ -133,7 +134,7 @@ body {
 /* Responsive Styles */
 @media screen and (max-width: 1200px) {
     .iframe-container {
-        flex-direction: column; /* Stack the iframes on top of each other */
+       
         align-items: center;
         margin-top: 0px;
         
@@ -189,3 +190,5 @@ body {
     height: 14px; /* Adjust size as needed */
 }
 }
+
+

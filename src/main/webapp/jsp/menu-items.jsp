@@ -7,6 +7,7 @@
     <meta charset="UTF-8">
     <title>Menu Items</title>
    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/menuItempage.css">
+   <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/menu-category.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <script>
