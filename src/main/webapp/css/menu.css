@@ -52,19 +52,9 @@ body {
 }
 
 
- .back-to-category-btn {
-    display: none; /* Hidden by default */
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    background-color: transparent;
-    border: none;
-    font-size: 16px;
-    color: #333;
-    cursor: pointer;
-    padding: 10px;
-    font-weight: bold;
-    z-index: 1000;
+/* Back to Category Button: Default (Hidden) */
+.back-to-category-btn {
+    display: none; /* Hide by default */
 }
 
 
@@ -128,8 +118,9 @@ body {
              .back-to-category-btn {
                 display: none !important;
             }
+          
+
         }
-   
    
 /* Responsive Styles */
 @media screen and (max-width: 1200px) {
@@ -163,32 +154,62 @@ body {
         height: 450px; /* Adjusted height */
         margin-bottom: 15px; /* Space between iframes */
     }
-    .back-to-category-btn {
-    display: none; /* Hidden by default */
-    position: fixed;
-    top: 50px;
-    left: 0px;
-    
-    border: none;
-    font-size: 16px;
-    color: red; /* White text */
-    cursor: pointer;
-    padding: 1px 2px;
-    font-weight: bold;
-    z-index: 1000;
-    border-radius: 5px; /* Rounded corners */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Add a slight shadow */
+  /* Default Button Style */
+/* Main Button Style */
+.back-to-category-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px; /* Space between icon and text */
+    background-color: #1f2937; /* Dark navy background */
+    color: #fff; /* White text */
+    border: none; /* Remove border */
+    border-radius: 50px; /* Rounded edges */
+    padding: 10px 20px; /* Padding for the button */
+    font-size: 16px; /* Font size for text */
+    font-weight: bold; /* Bold text */
+    cursor: pointer; /* Pointer cursor on hover */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+    position: fixed; /* Fix position on the screen */
+    bottom: 20px; /* Position above the bottom edge */
+    right: 20px; /* Position away from the right edge */
+    z-index: 1000; /* Ensure visibility above other elements */
+    transition: all 0.3s ease; /* Smooth transition for appearance changes */
 }
 
-.back-to-category-btn i {
-    margin-right: 5px; /* Space between the icon and text */
+/* Button Hover Style */
+.back-to-category-btn:hover {
+    background-color: #111827; /* Darker navy on hover */
+    transform: translateY(-3px); /* Slight lift on hover */
+}
+
+/* Icon-Only Style on Scroll */
+.back-to-category-btn.icon-only {
+    gap: 0; /* Remove space between icon and text */
+    padding: 10px; /* Reduce padding for a smaller button */
+    width: 50px; /* Set fixed width for the circular button */
+    height: 50px; /* Set fixed height for the circular button */
+    border-radius: 50%; /* Fully circular button */
+    font-size: 0; /* Hide text by making font-size 0 */
+    justify-content: center; /* Center the icon */
+}
+
+.back-to-category-btn.icon-only i {
+    font-size: 24px; /* Increase icon size for better visibility */
+}
+
+.back-to-category-btn span {
+    display: inline-block; /* Text is visible by default */
+    transition: opacity 0.3s ease; /* Smooth transition for text opacity */
+}
+
+.back-to-category-btn.icon-only span {
+    opacity: 0; /* Hide text in icon-only mode */
 }
 
 
-.back-icon {
-    width: 45px; /* Adjust size as needed */
-    height: 14px; /* Adjust size as needed */
-}
+
+
 }
 
 

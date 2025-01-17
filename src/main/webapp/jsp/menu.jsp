@@ -27,9 +27,9 @@
 
 <!-- Back Button -->
 <button id="back-to-category-btn" class="back-to-category-btn" onclick="goBackToCategory()">
-    Go Back <img src="<%=request.getContextPath()%>/images/back button.png" alt="Back Icon" class="back-icon">
-   
+    <i class="fas fa-bars"></i> Categories
 </button>
+
 
 
 <!-- Iframes Container -->
@@ -126,6 +126,21 @@
             backToCategoryBtn.style.display = 'none'; // Hide the back button in desktop view
         }
     });
+    
+ // Add event listener for scroll event
+    window.addEventListener('scroll', function () {
+        const backButton = document.getElementById('back-to-category-btn');
+
+        // Check the scroll position
+        if (window.scrollY > 100) {
+            // Add the 'icon-only' class when scrolled down
+            backButton.classList.add('icon-only');
+        } else {
+            // Remove the 'icon-only' class when scrolled back to the top
+            backButton.classList.remove('icon-only');
+        }
+    });
+
 </script>
 
 </body>

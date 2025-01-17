@@ -105,17 +105,39 @@ body {
         padding: 0;
         margin: 0;
     }
-
+  .category-container {
+    display: flex;
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center-align image and text */
+    justify-content: center; /* Center content */
+    background-color: #f9f9f9; /* Optional: Background color */
+    border: 1px solid #ddd; /* Optional: Border for container */
+    border-radius: 10px; /* Rounded corners */
+    padding: 15px;
+    max-width: 300px; /* Optional: Limit container width */
+    margin: 10px auto; /* Center container with auto margin */
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+    transition: transform 0.3s, box-shadow 0.3s; /* Smooth hover effects */
+}
     /* Smaller Category Image for Mobile */
     .category-container img {
-        width: 150px;
-        height: auto;
+       width: 100%; /* Full width of container */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 150px; /* Optional: Limit height */
+    object-fit: cover; /* Ensure image fills the area without distortion */
+    border-radius: 5px; /* Optional: Rounded image corners */
         
     }
 
     /* Adjust Category Heading Size */
     .category-container h2 {
-        font-size: 15px;
+         font-size: 18px;
+    font-weight: bold;
+    color: #1f2937; /* Navy color */
+    margin-top: 10px; /* Space between image and text */
+    text-align: center; /* Center-align the text */
+    border-top: 1px solid #ddd; /* Optional: Add separator line */
+    padding-top: 5px; /* Space between text and border */
     }
 
     /* Full-width Item Container */
@@ -137,10 +159,19 @@ body {
 
     /* Reduce Gap and Font Size for Add to Order Button */
     .add-to-order-btn {
-        font-size: 14px;
-        padding: 5px 7px;
-        margin-left:130px;
-    }
+    background-color: white; /* Button background color */
+    color: red; /* Button text color */
+    font-weight: bold; /* Bold text */
+    border: 2px solid blue; /* Button border */
+    border-radius: 5px; /* Rounded corners */
+    padding: 5px 8px; /* Padding for the button */
+    cursor: pointer; /* Pointer cursor on hover */
+    display: flex; /* Flexbox for icon and text alignment */
+    align-items: center; /* Align icon and text vertically */
+    gap: 5px; /* Space between icon and text */
+    margin-left: auto; /* Push button to the right in flex container */
+    transition: all 0.3s ease; /* Smooth hover effect */
+}
 
     /* Image and Iframes */
     .image {
