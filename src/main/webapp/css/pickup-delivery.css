@@ -28,7 +28,7 @@ body {
 
 .close-btn {
     position: absolute;
-    top: 10px;
+    top: 5px;
     right: 10px;
     font-size: 20px;
     cursor: pointer;
@@ -36,11 +36,10 @@ body {
 }
 
 h2 {
-     text-align: center;
-    border-bottom: 1px solid #000;
-    padding-bottom: 10px;
-    margin-bottom: 20px;
-    color:black;
+    text-align: center;
+    padding-bottom: 5px;
+    margin-bottom: 5px;
+    color:#000080;
 
 }
 
@@ -188,7 +187,7 @@ h2 {
 }
 
 .modal-content {
-    max-height: 90vh; /* Ensure the modal content doesn’t exceed the screen height */
+    max-height: 90vh; /* Ensure the modal content doesnÃƒÂ¢Ã¢â€šÂ¬Ã¢â€žÂ¢t exceed the screen height */
     overflow-y: auto; /* Enable vertical scrolling for content */
     padding-bottom: 60px; /* Add space for the fixed button */
     position: relative;
@@ -260,10 +259,10 @@ h2 {
 .modal-content input,
 .modal-content select {
     width: 100%;
-    padding: 10px;
+    padding: 5px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    font-size: 14px;
+    font-size: 12px;
     margin-bottom: 10px;
 }
 
@@ -273,7 +272,7 @@ h2 {
 /* Custom Dropdown Styling */
 .options {
     position: relative;
-    width: 100%;
+    width: 0%;
     margin-bottom: 15px;
 }
 
@@ -281,7 +280,7 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px;
+    padding: 5px;
     border: 1px solid #ccc;
     cursor: pointer;
     background-color: #fff;
@@ -452,32 +451,6 @@ h2 {
 
 
 
-
-
-/* Mobile View (for screens smaller than 600px) */
-@media screen and (max-width: 600px) {
-  .calendar {
-    width: 100%;
-    max-width: 95%; /* Use most of the screen width */
-    padding: 15px; /* Reduce padding for compact design */
-  }
-
-  .calendar-header {
-    font-size: 16px; /* Smaller font size for header */
-  }
-
-  .calendar-header button {
-    font-size: 16px; /* Adjust button size */
-  }
-
-  .calendar-days div {
-    padding: 8px; /* Smaller padding for days */
-    font-size: 12px; /* Adjust font size for better fit */
-  }
-}
-
-
-
 /* Mobile Styles */
 @media (max-width: 768px) {
     #order-sidebar-dialog {
@@ -487,6 +460,12 @@ h2 {
     margin-right: 5px;
     font-size:12px;
 }
+@media (max-width: 600px) {
+    .calendar-days {
+        grid-template-columns: repeat(7, minmax(30px, 1fr)); /* Smaller, flexible cells */
+    }
+}
+
 .switch-container {
             display: flex;
             align-items: center;
@@ -503,6 +482,7 @@ h2 {
             transition: background-color 0.3s;
             color: #000;
         }
+        
         .subtotal-row {
     justify-content: space-between; /* Ensures spacing between the two spans */
     align-items: center; /* Aligns content vertically */ 
@@ -511,17 +491,16 @@ h2 {
     font-weight: bold; /* Make the text stand out */
     color: #333; /* Neutral dark color for text */
    
-}    
+}  
+
+
+
 
 .subtotal-row #subtotal {
     font-weight: bold; /* Emphasize the subtotal amount */
     font-size: 16px; /* Slightly larger font for subtotal value */
 }
         
-
-    .modal-content {
-        width: 100%;
-    }
 
     .close-popup-btn {
         top: 15px;

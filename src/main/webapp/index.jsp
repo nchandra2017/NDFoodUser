@@ -259,12 +259,7 @@
             }
         });
 
-        // Block all other links and actions until modal is closed
-        $('a, button').not('#closePopup').on('click', function(e) {
-            if ($('#popupMessage').is(':visible')) {
-                e.preventDefault(); // Prevent navigation or other actions
-            }
-        });
+       
 
         // Deals Load More functionality
         let dealsPerPage = 6; // Show 6 deals initially

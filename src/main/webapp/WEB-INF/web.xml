@@ -136,9 +136,8 @@
         <servlet-name>OrderConfirmationServlet</servlet-name>
         <servlet-class>javaPage.contol.OrderConfirmationServlet</servlet-class> 
     </servlet>
-    
    
- 
+
     
     <session-config>
         <session-timeout>50</session-timeout> 

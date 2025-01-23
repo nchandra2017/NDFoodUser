@@ -29,7 +29,7 @@ body {
 }
 
 .restaurant-info h1 {
-    font-size: 22px;
+    font-size: 20px;
     color: red;
     margin-bottom: 10px;
     text-transform: uppercase;
@@ -38,7 +38,7 @@ body {
 }
 
 .restaurant-info p {
-    font-size: 14px;
+    font-size: 12px;
     color: #000;
     margin: 1px 0;
     line-height: 1.5; /* Adjusted for better readability */
@@ -82,7 +82,7 @@ body {
 .delete-note-icon {
     color: red;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 10px;
     margin-left: 10px;
     transition: color 0.3s;
 }
@@ -100,6 +100,7 @@ body {
     margin-bottom: 10px; /* Adds spacing below the section */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
     font-family: Arial, sans-serif; /* Consistent font */
+	
 }
 
 #order-method-details .details-rows {
@@ -110,7 +111,7 @@ body {
 }
 
 #order-method-details .details-rows i {
-    font-size: 14px; /* Icon size */
+    font-size: 12px; /* Icon size */
     color: #E91E63; /* Icon color */
     margin-right: 10px; /* Space between icon and text */
     flex-shrink: 0; /* Prevent icons from shrinking */
@@ -118,7 +119,7 @@ body {
 
 #order-method-details .details-rows p {
     margin: 0; /* Removes default margin */
-    font-size: 14px; /* Text size */
+    font-size: 12px; /* Text size */
     line-height: 1.5; /* Improved readability */
     flex-grow: 1; /* Allow text to occupy remaining space */
     display: flex; /* Ensure text spans multiple lines if needed */
@@ -194,7 +195,7 @@ body {
     justify-content: space-between; /* Space between item name and price */
     padding: 10px 0; /* Vertical padding */
     border-top: 1px solid #ddd; /* Divider line */
-    font-size: 14px; /* Text size */
+    font-size: 12px; /* Text size */
     color: #555; /* Muted text color */
 }
 
@@ -359,7 +360,7 @@ h3 i {
 .form-group label,
 .paymentForm-group label {
     display: block;
-    font-size: 14px;
+    font-size: 12px;
     font-weight: bold;
     font-family: 'Georgia', serif;
     margin-bottom: 5px;
@@ -372,7 +373,7 @@ input[type="tel"],
 input[type="password"],
 input[type="number"] {
     width: 100%;
-    font-size: 14px;
+    font-size: 12px;
     border: 1px solid #ccc;
     border-radius: 5px;
     color: Black;
@@ -541,7 +542,7 @@ input::placeholder {
     display: flex;
     justify-content: space-between;
     padding: 15px;
-    font-size: 14px;
+    font-size: 12px;
     border-top: 1px solid #ddd;
 }
 
@@ -551,7 +552,7 @@ input::placeholder {
     align-items: center; 
     padding: 15px 0; 
     border-top: 2px solid #ddd; 
-    font-size: 18px; 
+    font-size: 14px; 
     font-weight: bold; 
     color: #333; 
     margin-top: 10px; 

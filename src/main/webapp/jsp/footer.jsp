@@ -10,7 +10,7 @@
 
 <body>
     <footer>
-        <div class="container">
+        <div class="footer-page">
             <div class="footer-content">
                 <h3>Contact Us</h3>
                 <p>Email: nchandra25@ymail.com</p>

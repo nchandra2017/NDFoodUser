@@ -14,7 +14,9 @@ public class StripeClientUtil {
 
     private static final Logger logger = Logger.getLogger(StripeClientUtil.class.getName());
    // private static final String STRIPE_SECRET_KEY = System.getenv("STRIPE_SECRET_KEY");
-    private static final String STRIPE_SECRET_KEY = "sk_test_51OjSIqCxMKfcbczjwnVdNtvf9PiThNHotn4rMD9YjBg3jbFZ18nY27D5TWbFZnhYFOSpwB3w7eZyQQDqzgRzwY9700J1uHJ1xt";
+ // Retrieve the key from environment variables
+    private static final String STRIPE_SECRET_KEY = System.getenv("STRIPE_SECRET_KEY");
+
 
 
     // Initialize Stripe API Key

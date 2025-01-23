@@ -98,6 +98,16 @@
             this.classList.toggle('fa-eye-slash');
         });
     });
+    
+    
+ // Ensure modal stays centered
+    window.addEventListener("resize", function () {
+        const modal = document.querySelector(".Sign-link");
+        if (modal) {
+            modal.style.top = `${window.innerHeight / 2}px`;
+        }
+    });
+
 
     </script>
 </head>
@@ -105,7 +115,7 @@
 
 
 <body>
-    <div class="wrapper">
+    <div class="Sign-link">
         <span class="bg-animate"></span>
         <div class="form-box login">
             <h2>Sign In</h2>

@@ -11,20 +11,19 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #f9f9f9;
+    background-color: #fbf8f8;
 }
 
 .signup-form-box {
-    background-color: #fff;
-    padding: 30px;
+    background-color:white;
+    padding: 15px;
     border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0px 8px rgb(5 56 16);
     width: 400px;
 }
 
 .signup-form-box h2 {
     text-align: center;
-    margin-bottom: 20px;
     color: #000080;
 }
 
@@ -42,11 +41,11 @@ body {
 
 .form-group input {
     width: 100%;
-    padding: 10px;
+    padding: 5px;
     padding-right: 40px; /* Space for the eye icon */
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 12px;
     box-sizing: border-box;
 }
 
@@ -59,7 +58,7 @@ body {
 /* Eye Icon for Password Field */
 .password-wrapper #togglePassword {
     position: absolute;
-     top: 55px;
+     top: 45px;
     right: 10px;
     transform: translateY(-50%);
     cursor: pointer;
@@ -72,7 +71,7 @@ body {
 /* Eye Icon for Confirm Password Field */
 .password-wrapper #toggleConfirmPassword {
     position: absolute;
-    top: 36px;
+    top: 8px;
     right: 10px;
     transform: translateY(-50%);
     cursor: pointer;
@@ -85,7 +84,7 @@ body {
 
 .helper-message {
     color: red;
-    font-size: 12px;
+    font-size: 8px;
     margin-top: 5px;
     word-wrap: break-word; 
     white-space: normal; 
@@ -109,10 +108,7 @@ body {
     max-height: 100px;
     overflow: hidden;
 }
-#confirmPassword {
-    
-    margin-top: 20px; 
-}
+
 .success-message.hidden {
     opacity: 0;
     max-height: 0;
@@ -130,10 +126,10 @@ body {
     background: linear-gradient(to bottom, red, black);
     color: white;
     border: none;
-    padding: 12px;
+    padding: 5px;
     border-radius: 5px;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 12px;
 }
 
 .signup-btn:hover {
@@ -144,6 +140,7 @@ body {
     text-align: center;
     margin-top: 10px;
     color: #000080;
+    font-size:12px;
 }
 
 .signup-form-box p a {
@@ -157,9 +154,16 @@ body {
 
 /* Responsive Styles */
 @media (max-width: 768px) {
+    .signup-container {
+        padding-top: 0px; /* Adjust based on your navbar height */
+        margin-top: -120px;
+        
+    }
+
     .signup-form-box {
-        width: 100%; /* Adjust width for smaller screens */
+        width: 90%; /* Adjust width for smaller screens */
         padding: 20px; /* Compact design for mobile */
+        margin: 0 auto; /* Center the form on the screen */
     }
 
     .signup-form-box h2 {

@@ -52,10 +52,7 @@ body {
 }
 
 
-/* Back to Category Button: Default (Hidden) */
-.back-to-category-btn {
-    display: none; /* Hide by default */
-}
+
 
 
 
@@ -95,121 +92,16 @@ body {
         opacity: 1;
         transition: opacity 0.5s ease;
     }
-
-        
-        
-        
-
-        /* Only display the hamburger icon on mobile screens */
-        @media screen and (max-width: 768px) {
-             .back-to-category-btn {
-                display: none; /* Hidden by default, shown when category is clicked */
-            }
-
-            /* Adjust iframe position to avoid overlap with the button */
-            .iframe-container #items-frame {
-                margin-top: 90px;
-                max-width:100%;
-            }
-        }
-
-        /* Ensure the button is hidden on larger screens */
-        @media screen and (min-width: 769px) {
-             .back-to-category-btn {
+    
+    
+@media screen and (max-width: 768px) {
+             .back-to-category-btton {
                 display: none !important;
             }
-          
-
-        }
-   
-/* Responsive Styles */
-@media screen and (max-width: 1200px) {
-    .iframe-container {
-       
-        align-items: center;
-        margin-top: 0px;
+            /* Back to Category Button: Default (Hidden) */
+.back-to-category-btton {
+    display: none; /* Hide by default */
+}
+}
         
-    }
-
-    #category-frame, #items-frame {
-        width: 100%; /* Full width on smaller screens */
-        height: 500px; /* Adjust height */
-        margin-bottom: 20px; /* Space between the iframes */
         
-    }
-    
-}
-
-/* Mobile View Adjustments */
-@media screen and (max-width: 768px) {
-    /* Hide the image on mobile */
-    .image {
-        display: none; /* Hide image on smaller screens */
-    }
-
-   
-    /* Mobile adjustments for iframes */
-    #category-frame, #items-frame {
-        width: 120%; /* Full width for mobile view */
-        height: 450px; /* Adjusted height */
-        margin-bottom: 15px; /* Space between iframes */
-    }
-  /* Default Button Style */
-/* Main Button Style */
-.back-to-category-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px; /* Space between icon and text */
-    background-color: #1f2937; /* Dark navy background */
-    color: #fff; /* White text */
-    border: none; /* Remove border */
-    border-radius: 50px; /* Rounded edges */
-    padding: 10px 20px; /* Padding for the button */
-    font-size: 16px; /* Font size for text */
-    font-weight: bold; /* Bold text */
-    cursor: pointer; /* Pointer cursor on hover */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
-    position: fixed; /* Fix position on the screen */
-    bottom: 20px; /* Position above the bottom edge */
-    right: 20px; /* Position away from the right edge */
-    z-index: 1000; /* Ensure visibility above other elements */
-    transition: all 0.3s ease; /* Smooth transition for appearance changes */
-}
-
-/* Button Hover Style */
-.back-to-category-btn:hover {
-    background-color: #111827; /* Darker navy on hover */
-    transform: translateY(-3px); /* Slight lift on hover */
-}
-
-/* Icon-Only Style on Scroll */
-.back-to-category-btn.icon-only {
-    gap: 0; /* Remove space between icon and text */
-    padding: 10px; /* Reduce padding for a smaller button */
-    width: 50px; /* Set fixed width for the circular button */
-    height: 50px; /* Set fixed height for the circular button */
-    border-radius: 50%; /* Fully circular button */
-    font-size: 0; /* Hide text by making font-size 0 */
-    justify-content: center; /* Center the icon */
-}
-
-.back-to-category-btn.icon-only i {
-    font-size: 24px; /* Increase icon size for better visibility */
-}
-
-.back-to-category-btn span {
-    display: inline-block; /* Text is visible by default */
-    transition: opacity 0.3s ease; /* Smooth transition for text opacity */
-}
-
-.back-to-category-btn.icon-only span {
-    opacity: 0; /* Hide text in icon-only mode */
-}
-
-
-
-
-}
-
-

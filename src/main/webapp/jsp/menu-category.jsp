@@ -6,8 +6,107 @@
     <meta charset="UTF-8">
     <title>Menu Category List</title>
     
-     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/menu-category.css">
-     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/menuItempage.css">
+   
+     <style>
+     
+     /* Container for menu categories */
+.menu-category-container {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Styling for the heading */
+.select-category-heading {
+    font-size: 20px;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #0a3871;
+}
+
+/* Styling for the list */
+.menu-category-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 600px;
+}
+
+/* Each category item */
+.menu-category-list li {
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column; /* For mobile responsiveness */
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+}
+
+.menu-category-list li:hover {
+    transform: translateY(-5px);
+    background-color: #fdfdfd;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    border-color: #d32f2f; /* Highlight border on hover */
+}
+
+/* Link for the category */
+.menu-category-link {
+    display: flex;
+    flex-direction: column; /* Stack image and text */
+    align-items: center;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Image styling */
+.menu-category-image {
+    width: 100%; /* Full width */
+    height: auto; /* Maintain aspect ratio */
+   
+    object-fit: cover; /* Prevent image distortion */
+    border-bottom: 1px solid #ccc; /* Optional */
+}
+
+/* Category name styling */
+.menu-category-name {
+    padding: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+/* Responsive Design: Mobile View */
+@media screen and (max-width: 768px) {
+    .menu-category-container {
+        margin-top: 50px;
+        margin-left:-30px
+    }
+
+    .menu-category-list {
+        margin-left:20px;
+        width: 90%;
+    }
+
+    .menu-category-list li {
+        margin-bottom: 15px;
+    }
+
+    .menu-category-name {
+        font-size: 16px;
+    }
+}
+     
+     
+     </style>
+     
 </head>
 <body>
     <div class="menu-category-container">

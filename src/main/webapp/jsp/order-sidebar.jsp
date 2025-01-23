@@ -2,21 +2,90 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Order Sidebar</title>
     
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/order-sidebar.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/pickup-delivery.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
    <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/PickUpfrom.css"> 
-    
-    
    
+<%@ page import="java.io.FileInputStream, java.util.Properties" %>
+<%
+    String googleMapsApiKey = "";
+    try {
+        // Specify the path to your config file
+        String configFilePath = "C:/config/config.properties";
+        Properties properties = new Properties();
+        FileInputStream fis = new FileInputStream(configFilePath);
+        properties.load(fis);
+        fis.close();
+        googleMapsApiKey = properties.getProperty("GOOGLE_MAPS_API_KEY", "");
+        
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+%>
 
-  
-  
+<script>
+    const GOOGLE_MAPS_API_KEY = "<%= googleMapsApiKey %>";
+    if (GOOGLE_MAPS_API_KEY) {
+        const mapsScript = document.createElement('script');
+        mapsScript.src = "https://maps.googleapis.com/maps/api/js?key=" + GOOGLE_MAPS_API_KEY + "&libraries=places&callback=initAutocomplete";
+        mapsScript.async = true;
+        mapsScript.defer = true;
+        document.head.appendChild(mapsScript);
+        console.log("Google Maps API Script Loaded:", mapsScript.src);
+    } else {
+        console.error("Google Maps API Key is missing!");
+    }
+</script>
 
 
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeFIcpX8CHiTMHrIEBI0iSg9ztoEegRGk&libraries=places"></script>
+
+ 
+ 
+  <style >
+.pac-container {
+    z-index: 10000 !important;
+    position: absolute !important;
+    width: 100% !important;
+    max-width: 430px;
+}
+/* Responsive Styles for Mobile View */
+@media screen and (max-width: 430px) {
+    .modal-content {
+        max-width: 90%; /* Adjust modal width */
+        padding: 10px;
+    }
+
+    .form-group input,
+    .form-group select {
+        font-size: 12px; /* Adjust input font size */
+    }
+
+    .calendar-header {
+        font-size: 14px; /* Smaller font size for header */
+    }
+
+    .calendar-days div {
+        padding: 8px; /* Smaller padding for calendar days */
+        font-size: 10px; /* Smaller font for better fit */
+    }
+
+    .close-popup-btn {
+        font-size: 16px; /* Smaller close button */
+    }
+
+    .checkout-btn {
+        font-size: 14px; /* Smaller font for button */
+        padding: 8px 10px;
+    }
+}
+
+
+  </style>
+
 
 </head>
 <body>
@@ -79,7 +148,8 @@
         
          <div class="form-group" id="address-group" style="display: none;">
             <label for="order-address">Your Address</label>
-            <input type="text" id="order-address" placeholder="Enter your address">
+            <input type="text" id="order-address" placeholder="Enter your address" autocomplete="off">
+
          </div>
 
         <div class="form-group">
@@ -228,7 +298,7 @@ function renderCalendar(year, month) {
     currentMonth.textContent = monthName + " " + year; 
 
 
-    // Disable "prev" button if it’s before today
+    // Disable "prev" button if itâs before today
     prevMonthButton.disabled = new Date(year, month) < new Date(today.getFullYear(), today.getMonth(), 1);
 }
 
@@ -552,43 +622,44 @@ function formatDateToMMDDYYYY(date) {
 
 	
 
-
 	function initAutocomplete() {
 	    const addressInput = document.getElementById("order-address");
 
-	    // Ensure the element exists and is an input
-	    if (!addressInput || addressInput.tagName !== 'INPUT') {
-	        console.error("Error: 'order-address' is not found or not an input element.");
+	    if (!addressInput) {
+	        console.error("Address input not found!");
 	        return;
 	    }
 
-	    // Initialize Google Maps Places Autocomplete
 	    const autocomplete = new google.maps.places.Autocomplete(addressInput, {
-	        types: ['address'], // Restrict to address types
-	        componentRestrictions: { country: "us" }, // Restrict to US addresses
+	        types: ["address"],
+	        componentRestrictions: { country: "us" },
 	    });
 
-	    // Add event listener for place selection
-	    autocomplete.addListener("place_changed", function () {
-	        const place = autocomplete.getPlace();
+	    // Ensure dropdown visibility on focus
+	    addressInput.addEventListener("focus", () => {
+	        setTimeout(() => {
+	            addressInput.dispatchEvent(new Event("input"));
+	        }, 300);
+	    });
 
-	        // Check if a valid address was selected
+	    autocomplete.addListener("place_changed", () => {
+	        const place = autocomplete.getPlace();
 	        if (place && place.formatted_address) {
-	            addressInput.value = place.formatted_address; // Update input with the formatted address
 	            console.log("Selected Address:", place.formatted_address);
+	            addressInput.value = place.formatted_address;
 	        } else {
-	            alert("Please select a valid address from the suggestions.");
-	            console.error("Autocomplete place object:", place); // Debugging log
+	            console.error("Invalid place selected.");
 	        }
 	    });
 	}
 
-	// Ensure the DOM is loaded before initializing
+
+
 	document.addEventListener("DOMContentLoaded", function () {
+	    console.log("DOM fully loaded and parsed.");
 	    initAutocomplete();
 	});
 
-   
    
    
    

@@ -9,7 +9,37 @@
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/paymentPage.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/checkoutGuest.css">
     
-     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCeFIcpX8CHiTMHrIEBI0iSg9ztoEegRGk&libraries=places"></script>
+<%@ page import="java.io.FileInputStream, java.util.Properties" %>
+<%
+    String googleMapsApiKey = "";
+    try {
+        // Specify the path to your config file
+        String configFilePath = "C:/config/config.properties";
+        Properties properties = new Properties();
+        FileInputStream fis = new FileInputStream(configFilePath);
+        properties.load(fis);
+        fis.close();
+        googleMapsApiKey = properties.getProperty("GOOGLE_MAPS_API_KEY", "");
+        
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+%>
+
+<script>
+    const GOOGLE_MAPS_API_KEY = "<%= googleMapsApiKey %>";
+    if (GOOGLE_MAPS_API_KEY) {
+        const mapsScript = document.createElement('script');
+        mapsScript.src = "https://maps.googleapis.com/maps/api/js?key=" + GOOGLE_MAPS_API_KEY + "&libraries=places&callback=initAutocomplete";
+        mapsScript.async = true;
+        mapsScript.defer = true;
+        document.head.appendChild(mapsScript);
+        console.log("Google Maps API Script Loaded:", mapsScript.src);
+    } else {
+        console.error("Google Maps API Key is missing!");
+    }
+</script>
+
     
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
@@ -704,9 +734,12 @@
     // Initialize Autocomplete when the DOM content loads
     document.addEventListener("DOMContentLoaded", initAutocomplete);
 
+    
   
     document.addEventListener("DOMContentLoaded", () => {
         const stripe = Stripe("pk_test_51OjSIqCxMKfcbczj6MOFZD2lIahf0Ce97Bw38iArZp96x5TFGPnfUmwWvBIXzBArjH2tTwti2MYRcjehlq8ml1Db00jZT3kozc");
+        
+        
         const elements = stripe.elements();
         const card = elements.create("card", {
             style: {
