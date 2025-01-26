@@ -846,16 +846,17 @@ input::placeholder {
     color: #000000; 
     transition: transform 0.3s ease; 
 }
+	
 #special-notes p {
-    font-size: 12px;
     color: red;
-    line-height: 1.5;
-    margin: 0;
+    margin-left: -120px;
 }
 .delete-note-icon {
     font-size: 10px;
-    color: #ff4d4d; 
+    color: red; 
     cursor: pointer;
+	margin-right:-300px;
+	margin-top:-15px;
     transition: color 0.3s, transform 0.3s;
 }
 

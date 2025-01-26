@@ -28,7 +28,7 @@
         <p>Phone: 808-807-2025</p>
     </div>
 
-    <!-- Special Notes Section -->
+   
     <!-- Special Notes Section -->
 <div id="special-notes">
     <h2>Special Notes</h2>

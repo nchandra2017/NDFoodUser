@@ -66,10 +66,25 @@
             margin-bottom: 20px;
         }
 
- 
+@media (max-width: 768px) {
+#special-notes p {
+    color: red;
+    margin-left: -230px;
+}
+.delete-note-icon {
+    font-size: 10px;
+    color: red; 
+    cursor: pointer;
+	margin-right:-380px;
+	margin-top:-15px;
+    transition: color 0.3s, transform 0.3s;
+}
+
+
+}
+
     </style>
 </head>
-
 <%@ include file="/jsp/PaymantNavigation.jsp" %>
 
 <body>
@@ -305,30 +320,38 @@
         const firstItemRow = document.getElementById("first-item-row");
         const orderList = document.getElementById("orders-lists");
         const cartCountElement = document.getElementById("total-items");
-        const subtotalElement = document.getElementById("subtotal"); 
-        const sTotalElement = document.getElementById("s-totall"); 
-        const deliveryFee = loadOrderDetails(); 
+        const subtotalElement = document.getElementById("subtotal");
+        const taxElement = document.getElementById("tax"); // Targeting the tax display element
+        const sTotalElement = document.getElementById("s-totall");
 
+        const deliveryFee = loadOrderDetails() || 0; // Default delivery fee to 0
+        let totalQuantity = 0; // Initialize total quantity
+        let subtotal = 0; // Initialize subtotal
+        let totalTax = 0; // Initialize total tax
+
+        // Clear existing content
         orderList.innerHTML = "";
-        totalQuantity = 0;
+        firstItemRow.innerHTML = "";
 
-        if (items.length === 0) {
+        // Handle empty cart
+        if (!items || items.length === 0) {
             firstItemRow.innerHTML = "<p>Your cart is empty</p>";
             subtotalElement.textContent = "0.00";
+            taxElement.textContent = "0.00"; // Clear tax
             sTotalElement.textContent = "0.00";
-            document.getElementById("tax").innerText = "0.00";
-            cartCountElement.innerText = "0";
+            cartCountElement.textContent = "0";
             return;
         }
 
-        let subtotal = 0;
-
+        // Loop through items and calculate row-wise subtotal, tax, and total quantity
         items.forEach((item, index) => {
-            const itemTotal = (item.itemPrice * item.quantity).toFixed(2);
-            subtotal += parseFloat(itemTotal);
-            totalQuantity += item.quantity;
+            const itemTotal = item.itemPrice * item.quantity; // Total price for this item
+            const tax = itemTotal * TAX_RATE; // Tax for this item
+            subtotal += itemTotal; // Accumulate subtotal
+            totalTax += tax; // Accumulate total tax
+            totalQuantity += item.quantity; // Accumulate total quantity
 
-
+            // Generate HTML for each item
             const itemHTML = `
                 <div class="item-details">
                     <span>Item:  ` + item.itemName + `</span> x <span>` + item.quantity + `</span>
@@ -336,6 +359,7 @@
                 <div class="item-price">
                     <span>$` + itemTotal + `</span>
                 </div>
+
             `;
 
             if (index === 0) {
@@ -348,15 +372,14 @@
             }
         });
 
-        const tax = (subtotal * TAX_RATE).toFixed(2);
-        const totalWithTax = (subtotal + deliveryFee + parseFloat(tax)).toFixed(2);
+        // Calculate total with tax and delivery fee
+        const totalWithTax = subtotal + totalTax + deliveryFee;
 
-      
-        subtotalElement.textContent = totalWithTax; 
-        sTotalElement.textContent = totalWithTax; 
-
-        document.getElementById("tax").innerText = tax;
-        cartCountElement.innerText = totalQuantity;
+     // Update the DOM with calculated values
+        subtotalElement.textContent = (subtotal + totalTax).toFixed(2); // Tax + total item price
+        taxElement.textContent = totalTax.toFixed(2); // Display total tax
+        sTotalElement.textContent = (subtotal + totalTax + deliveryFee).toFixed(2); // Subtotal + Delivery Fee
+        cartCountElement.textContent = totalQuantity; // Display total item count
     }
 
     function initToggleFeature() {

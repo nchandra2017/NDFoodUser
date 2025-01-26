@@ -1,0 +1,62 @@
+.hade_text {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: white;
+    text-align: left;
+}
+
+.header-content {
+    flex: 1;
+    margin-top: -100px; /* Move the text section upward */
+}
+
+.header-img {
+    margin-top: 20px;
+    width: 900px; /* Adjust the image size */
+    height: 500px;
+    margin-left: 20px;
+    border-radius: 10px;
+}
+
+.header-content h1 {
+    font-size: 26px;
+    font-weight: bold;
+    margin: 0;
+    color: red;
+}
+
+.header-content p {
+    font-size: 12px;
+    margin: 10px 0 0;
+    color: #000080;
+}
+
+/* Mobile view adjustments */
+@media (max-width: 768px) {
+    .hade_text {
+      margin-top:50px;
+        flex-direction: column; /* Stack content vertically */
+        text-align: center; /* Center align text for mobile */
+    }
+
+    .header-content {
+        margin-top: 0; /* Remove upward margin for text */
+        margin-bottom: 20px; /* Add space below the text */
+    }
+
+    .header-img {
+        width: 100%; /* Make the image responsive */
+        height: auto; /* Maintain aspect ratio */
+        margin-left: 0; /* Remove extra margin for mobile */
+    }
+
+    .header-content h1 {
+        font-size: 22px; /* Adjust font size for smaller screens */
+    }
+
+    .header-content p {
+        font-size: 14px; /* Slightly larger text for better readability */
+    }
+}

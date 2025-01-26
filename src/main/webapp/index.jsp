@@ -12,10 +12,17 @@
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/footer.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/homestyle.css">
     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/modalPopup.css">
+     <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/home_Pic.css">
 
     <!-- Ensure jQuery is loaded -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    
+    <style>
+  
+    
+    </style>
 </head>
 
 <body>
@@ -37,12 +44,20 @@
         </div>
     </div>
 
+   
     <!-- Include the Navbar -->
     <%@ include file="/jsp/Navigation.jsp" %>
     
-    
-    
-    
+  <div id="header" class="hade_text">
+    <div class="header-content">
+        <h1>Welcome to ND Bengali Food</h1>
+        <p>Your one-stop destination for authentic Bengali Cuisine.</p>
+    </div>
+    <img src="<%=request.getContextPath()%>/images/home pic.png" alt="ND Bangali Food Logo" class="header-img">
+</div>
+
+
+
 
     <!-- Deals Section -->
     <section class="deals-section">
