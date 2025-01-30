@@ -1,7 +1,14 @@
-body {
-    margin: 0;
-    padding: 0;
+
+body, .main-container, .navigation-links, .navbar {
+    overflow: visible !important;
+    position: relative;
+    z-index: 1;
 }
+
+.parent-selector {
+    overflow: visible !important;
+}
+
 
 .content {
     margin-top: 70px; /* Adjust this based on the height of your navbar */
@@ -116,50 +123,44 @@ body {
 /* Account dropdown styles */
 .account-dropdown {
     position: relative;
+    z-index: 1050; /* Ensure dropdown is above most elements */
 }
 
-.account-link {
-    display: inline-block;
-    cursor: pointer;
-    color: #333;
-    text-decoration: none;
-    padding: 10px 15px;
-}
-
-.account-link i {
-    margin-left: 5px;
-}
-
-.dropdown-content {
+.account-dropdown .dropdown-content {
     display: none;
+    margin-top:15px;
     position: absolute;
-    top: 120%;
-    right: 0;
-    width: 180px;
-    background-color: red;
-    z-index: 1000;
-    transition: transform 0.3s ease, opacity 0.3s ease;
-    transform: translateY(-20px);
-    opacity: 0;
-}
-
-.dropdown-content a {
-    display: block;
-    padding: 15px;
-    text-align: left;
-    color: red;
-    font-size:14px;
-}
-
-.dropdown-content a:hover {
-    text-decoration: underline;
+    top: 100%; /* Aligns below the username */
+    left: -10px;
+    
+    min-width: 190px;
+   
+   
+   
+    overflow: visible;
+    white-space: nowrap;
 }
 
 .account-dropdown:hover .dropdown-content {
     display: block;
-    transform: translateY(0);
-    opacity: 1;
 }
+
+
+/* Ensure the dropdown links are visible and styled properly */
+.dropdown-content a {
+    display: block;
+    padding: 15px;
+    text-align: center;
+    color: red;
+    font-size: 14px;
+    background: white;
+    text-decoration: none;
+}
+
+.dropdown-content a:hover {
+    background: #f8f9fa;
+}
+
 
 /* General Navigation Links Style */
 .navigation-links {
@@ -241,10 +242,6 @@ body {
         color: black; /* Neutral text color */
         text-align: left; /* Align text to the left */
         text-decoration: none; /* Remove underline */
-    }
-
-    .navigation-links a:hover {
-        text-decoration: underline; /* Highlight link on hover */
     }
 
     .navigation-links li {

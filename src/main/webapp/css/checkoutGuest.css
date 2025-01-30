@@ -20,11 +20,13 @@ body {
 
 /* Restaurant Info */
 .restaurant-info {
+	
     text-align: center;
-    margin: 20px 0;
-    background-color: #f8f8f8;
+    margin: 0px 0;
+    background-color: white;;
     padding: 20px;
     border-radius: 10px;
+	border: 1px solid #ccc; 
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
@@ -96,7 +98,7 @@ body {
     border: 1px solid #ccc; /* Adds a border around the section */
     border-radius: 8px; /* Rounded corners */
     padding: 15px; /* Inner spacing */
-    background-color: #f9f9f9; /* Light background */
+    background-color: white; 
     margin-bottom: 10px; /* Adds spacing below the section */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
     font-family: Arial, sans-serif; /* Consistent font */
@@ -146,7 +148,7 @@ body {
 #order-summary-details {
     border: 1px solid #ccc; /* Adds a border */
     border-radius: 8px; /* Rounded corners */
-    background-color: #f9f9f9; /* Light background color */
+    background-color: white; /* Light background color */
     padding: 15px; /* Inner spacing */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
     margin-bottom: 20px; /* Space below the section */
@@ -194,9 +196,9 @@ body {
     display: flex; /* Align items horizontally */
     justify-content: space-between; /* Space between item name and price */
     padding: 10px 0; /* Vertical padding */
-    border-top: 1px solid #ddd; /* Divider line */
+    background-color:white;
     font-size: 12px; /* Text size */
-    color: #555; /* Muted text color */
+    color: black; /* Muted text color */
 }
 
 #order-summary-details .summary-row:first-child {
@@ -229,6 +231,7 @@ body {
     font-size: 16px;
     padding-bottom: 10px;
 	margin-top:50px;
+	 
 }
 h3 span {
     display: inline-block;
@@ -255,6 +258,7 @@ h3 i {
     gap: 10px;
     flex-wrap: wrap;
 	margin-top:-20px;
+	
 }
 #payment-method p.ready-message {
 	font-size: 12px;
@@ -262,27 +266,21 @@ h3 i {
 	margin-top:-0px;
 }
 
-.payment-method img {
-	margin-top:20px;
-    max-width: 80px;
-    height: auto;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin-bottom:20px;
-}
+
 .payment-switch {
     display: flex;
     justify-content: space-between;
-    margin: 20px 0;
+    margin: 15px 0;
     border: 1px solid #ccc;
-    border-radius: 25px;
-    padding: 5px;
-    background-color: #f9f9f9;
+    border-radius: 20px;
+    padding: -5px;
+	
+    background-color: white;
 }
 
 .switch-btn {
     flex: 1;
-    padding: 10px 20px;
+    padding: 10px 15px;
     text-align: center;
     border: none;
     background-color: transparent;
@@ -355,6 +353,7 @@ h3 i {
 .form-group,
 .paymentForm-group {
     margin-bottom: 15px;
+	
 }
 
 .form-group label,

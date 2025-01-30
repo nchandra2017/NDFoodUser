@@ -938,7 +938,7 @@ function formatDateToMMDDYYYY(date) {
             document.getElementById("orderModal").style.display = "block";
         }
 
-
+        
 
         function enableProceedButton() {
             if (orderTypeSelected) {
@@ -973,7 +973,8 @@ function formatDateToMMDDYYYY(date) {
             window.location.href = "/com.foodUser/jsp/PaymentStripe.jsp"; // Update path if necessary
         }
 
-      
+     
+
 
 
     </script>

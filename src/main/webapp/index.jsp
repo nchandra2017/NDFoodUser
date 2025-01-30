@@ -261,6 +261,12 @@
         $('#popupMessage').fadeIn();
         $('body').addClass('modal-open'); // Disable scrolling
 
+        // Automatically close Popup Modal after 3 seconds (3000ms)
+        setTimeout(function() {
+            $('#popupMessage').fadeOut();
+            $('body').removeClass('modal-open'); // Re-enable scrolling
+        }, 3000);
+
         // Close Popup Modal when "Close" button is clicked
         $('#closePopup').click(function() {
             $('#popupMessage').fadeOut();
@@ -273,8 +279,6 @@
                 event.stopPropagation(); // Prevent modal from closing on outside click
             }
         });
-
-       
 
         // Deals Load More functionality
         let dealsPerPage = 6; // Show 6 deals initially
